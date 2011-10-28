@@ -1,8 +1,0 @@
-<%
-if(World.deleteMob(Integer.valueOf(web.getVars.get("mobid")))) {
-	web.out.println("<span class=\"okbox\">Usunięto moba #"+web.getVars.get("mobid")+"</span>");
-}
-else {
-	web.out.println("<span class=\"errorbox\">Nie udało się usuniąć moba #"+web.getVars.get("mobid")+"</span>");
-}
-%>

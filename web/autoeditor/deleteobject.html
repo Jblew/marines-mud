@@ -1,8 +1,0 @@
-<%
-if(World.deleteMudObject(web.getVars.get("objectid"))) {
-	web.out.println("<span class=\"okbox\">Usunięto obiekt #"+web.getVars.get("objectid")+"</span>");
-}
-else {
-	web.out.println("<span class=\"errorbox\">Nie udało się usuniąć obiektu #"+web.getVars.get("objectid")+"</span>");
-}
-%>

@@ -1,8 +1,0 @@
-<%
-if(World.deleteRoom(web.getVars.get("roomid"))) {
-	web.out.println("<span class=\"okbox\">Usunięto room #"+web.getVars.get("roomid")+"</span>");
-}
-else {
-	web.out.println("<span class=\"errorbox\">Nie udało się usuniąć rooma #"+web.getVars.get("roomid")+"</span>");
-}
-%>
