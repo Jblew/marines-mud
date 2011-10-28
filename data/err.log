@@ -1,0 +1,55 @@
+user changed to 'muddeveloper'
+Using default JVM in /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so
+Attemtping to load library /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so
+JVM library /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so loaded
+JVM library entry point found (0xB773A3E0)
++-- DUMPING JAVA VM CREATION ARGUMENTS -----------------
+| Version:                       0x010004
+| Ignore Unrecognized Arguments: True
+| Extra options:                 3
+|   "-Xmx10m" (0x00000000)
+|   "-Djava.class.path=MarinesMUD4.jar" (0x00000000)
++-------------------------------------------------------
+Java VM created successfully
+Class org/apache/commons/daemon/support/DaemonLoader found
+Native methods registered
+java_init done
+Daemon loading...
+Daemon loaded successfully
+java_load done
+2011.09.23 10:57:36 [main] info> [SERVER START] RUN MODE: ***PRODUCTION***
+2011.09.23 10:57:39 [main] notice> SourceScanner   Scanning source and finding Todo in code is off, because scanning classes invokes constructors of iner classes. Why?!
+2011.09.23 10:57:39 [flash-policy-server-thread-5] info> Waiting for connection to flash policy server...
+Service exit with a return value of 143
+user changed to 'muddeveloper'
+Using default JVM in /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so
+Attemtping to load library /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so
+JVM library /usr/lib/jvm/java-6-openjdk//jre/lib/i386/client/libjvm.so loaded
+JVM library entry point found (0xB77073E0)
++-- DUMPING JAVA VM CREATION ARGUMENTS -----------------
+| Version:                       0x010004
+| Ignore Unrecognized Arguments: True
+| Extra options:                 3
+|   "-Xmx10m" (0x00000000)
+|   "-Djava.class.path=MarinesMUD4.jar" (0x00000000)
++-------------------------------------------------------
+Java VM created successfully
+Class org/apache/commons/daemon/support/DaemonLoader found
+Native methods registered
+java_init done
+Daemon loading...
+Daemon loaded successfully
+java_load done
+2011.10.14 12:21:07 [main] info> [SERVER START] RUN MODE: ***PRODUCTION***
+2011.10.14 12:21:10 [main] notice> SourceScanner   Scanning source and finding Todo in code is off, because scanning classes invokes constructors of iner classes. Why?!
+2011.10.14 12:21:10 [flash-policy-server-thread-4] info> Waiting for connection to flash policy server...
+2011.10.14 12:21:11 [MudThreadManager-7] notice> Tickers   Tickers: Increased scheduledExecutor core pool size from 2 to 3.
+Exception in thread "console-reader-thread-23" java.lang.NullPointerException
+	at marinesmud.system.ConsoleReader$Runner.run(ConsoleReader.java:99)
+	at java.lang.Thread.run(Thread.java:636)
+2011.10.14 12:21:19 [main] info> Notifications are ENABLED.
+2011.10.14 12:21:23 [MudThreadManager-17] info> Performing time synchronization with Atomic Clock NTP Server.
+2011.10.14 12:21:23 [MudThreadManager-17] info> Successfully synchronized time with Atomic Clock NTP Server. Current time correction: -6560ms.
+2011.10.14 12:21:25 [main] info> Twitter: Successfully updated the status to [2011/9/14 BlazeMud znowu działa! :) Przypominamy, że aby się zalogować, musicie podać host: 46.4.143.23 i port 9000. Miłej gry!].
+2011.10.14 12:21:25 [telnet-server-thread-29] info> Listening on 0.0.0.0 9000; Host name: 46.4.143.23
+2011.10.14 12:21:25 [telnet-server-thread-29] info> Telnet is now waiting for selector keys...

@@ -1,0 +1,72 @@
+intro:
+>
+  Credits:
+    -BlazeMUD is created by Jblew (www.jblew.pl) and Progtryk.
+    -BlazeMUD is based on MarinesMUD, created by Jblew (www.jblew.pl)
+            and Progtryk.
+    -All the code, world, texts database structure, website ang game
+            is copyright by Jblew (www.jblew.pl) and Progtryk.
+    -MarinesMUD uses DynamicCompiler created
+            by David J. Biesack (David.Biesack@sas.com).
+  --------
+
+
+
+                {V[ powered by {GM A R I N E S   M U D 5{x{V ]{x
+
+     {R ____  _                {B                     _         _ {x
+     {R|  _ \| |               {B                    | |       | |{x
+     {R| |_) | | __ _ _______  {B _ __ ___  _   _  __| |  _ __ | |{x
+     {R|  _ <| |/ _` |_  / _ \ {B| '_ ` _ \| | | |/ _` | | '_ \| |{x
+     {R| |_) | | (_| |/ /  __/{B_| | | | | | |_| | (_| |_| |_) | |{x
+     {R|____/|_|\__,_/___\___{B(_)_| |_| |_|\__,_|\__,_(_) .__/|_|{x
+     {R                        {B                        | |      {x
+     {R                        {B                        |_|      {x
+
+                                        {V"Find your destiny..."{x
+
+    blaze.mud.org, Port 9000
+
+  {x
+
+menu:
+>             
+  {C       M A R I N E S M U D 5 engine
+        ___    _      ___    _____   ____
+       | _ \  | |    / _ \  |___  | |  __|
+       ||_|/  | |   | |_| |    / /  | |_
+       | _ \  | |   |  _  |   / /   |  _|
+       ||_| | | |_  | | | |  / /__  | |__
+       |___/  |___| |_| |_| |_____| |____|
+                               . MUD . org
+  {x{y
+      +-----------------------------------+
+      | Select an option:                 |
+      +-----------------------------------+
+      |    {Y1) Play game{y                   |
+      |    {Y0) Log out{y                     |
+      +-----------------------------------+
+  {x
+  
+colors:
+>
+  Available colors ({ + litera):
+    v: {vLorem ipsum dolor sit amet.{x
+    V: {VLorem ipsum dolor sit amet.{x
+    r: {rLorem ipsum dolor sit amet.{x
+    R: {RLorem ipsum dolor sit amet.{x
+    g: {gLorem ipsum dolor sit amet.{x
+    G: {GLorem ipsum dolor sit amet.{x
+    y: {yLorem ipsum dolor sit amet.{x
+    Y: {YLorem ipsum dolor sit amet.{x
+    b: {bLorem ipsum dolor sit amet.{x
+    B: {BLorem ipsum dolor sit amet.{x
+    m: {mLorem ipsum dolor sit amet.{x
+    M: {MLorem ipsum dolor sit amet.{x
+    c: {cLorem ipsum dolor sit amet.{x
+    C: {CLorem ipsum dolor sit amet.{x
+    w: {wLorem ipsum dolor sit amet.{x
+    W: {WLorem ipsum dolor sit amet.{x
+    x: {xLorem ipsum dolor sit amet.{x
+    X: {XLorem ipsum dolor sit amet.{x
+   

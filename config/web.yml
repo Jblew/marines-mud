@@ -1,0 +1,110 @@
+debug server: false
+server so timeout: 4000
+
+http ok response header: HTTP/1.0 200 OK
+http not found response header: HTTP/1.0 404 Not found
+http headers:
+  - 'Content-Encoding: utf-8'
+  - 'Server: MARINESMUD4-WebServer'
+
+play page url name: play
+admin panel url name: admin
+login panel url name: login
+front page url: page/strona-glowna
+not found page url name: nie-znaleziono
+
+head:
+>
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="generator" content="MARINESMUD4" />
+
+#static web pages are accesible in url : '/page/url-name' where url-name is url name defined for every page in this config file.
+static web pages:
+   - url name: strona-glowna
+     menu name: Strona główna
+     title: Witaj w Blaze MUDzie!
+     for admins: false
+     layout: default
+     content:
+     >
+       <p>Witaj w Blaze MUDzie, poszukujący przygód. Mamy nadzieję, że
+       Ci się spodoba i dołożymy wszelkich starań, aby twój pobyt u nas
+       był dla Ciebie dobrą rozrywką.</p>
+
+   - url name: testowa-strona
+     menu name: Testowa strona
+     title: Testowa strona
+     layout: default
+     for admins: false
+     content:
+     >
+       <p>Testuję tu coś ważnego, dlatego zrobiłem tą podstronę.
+          Można ją zmienić w ./config/web.yml. Można tam też dodać więcej statycznych stron.</p>
+       <p style="text-align: right;">Jblew</p>
+
+       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+       consectetur eros sed mauris tempus malesuada in id arcu. Praesent
+       faucibus libero sit amet turpis fringilla ut vestibulum mi viverra.
+       Suspendisse rutrum euismod porttitor. Cum sociis natoque penatibus
+       et magnis dis parturient montes, nascetur ridiculus mus. Nulla
+       feugiat diam vitae velit sodales congue. Ut id tortor quam, non
+       ullamcorper nibh. Nunc tortor nunc, sagittis sed semper id, egestas
+       vel eros. Donec enim nisi, condimentum et mollis ut, consequat eget
+       massa. Suspendisse ac dolor dolor. Sed tristique tristique laoreet.
+       Praesent quis lectus sed orci consequat feugiat. Donec elit elit,
+       vulputate in consectetur ac, porttitor ac est. Phasellus eu tellus
+       lorem. Quisque tincidunt sagittis molestie. In non sem odio. Class
+       aptent taciti sociosqu ad litora torquent per conubia nostra, per
+       inceptos himenaeos. Donec egestas scelerisque nibh a mollis.
+       Pellentesque hendrerit vulputate consectetur. Donec varius vehicula
+       libero, vitae dignissim quam commodo nec.</p>
+
+       <p>Morbi non nulla eros, non volutpat diam. Nunc mauris justo, congue
+       vel rutrum non, porttitor eget neque. Class aptent taciti sociosqu ad
+       litora torquent per conubia nostra, per inceptos himenaeos. Phasellus
+       a fermentum quam. Mauris venenatis dictum porta. In sodales aliquam
+       ipsum vitae eleifend. Proin rutrum tincidunt elit eget pellentesque.
+       Quisque eget vestibulum est. Nulla nunc libero, eleifend sit amet
+       dapibus sit amet, dictum id augue. Phasellus tellus lectus, lacinia et
+       vestibulum at, ullamcorper ut ligula. Curabitur porttitor malesuada
+       ligula, at ultricies velit gravida eu. Ut pellentesque tortor in enim
+       ultrices at convallis felis lacinia. In dapibus eros sit amet nulla
+       posuere tristique.</p>
+
+   - url name: edycja-krain
+     menu name: Edycja krain
+     title: Jak edytować krainy?
+     for admins: true
+     layout: default
+     content:
+     >
+       <p>Jakieś tam blabla o tworzeniu krain. Ktoś w końcu musi się za to zabrać i napisać coś. Można to edytować w pliku ./config/web.yml.</p>
+
+   - url name: nie-znaleziono
+     menu name: Nie znaleziono
+     title: Nie znaleziono
+     for admins: false
+     layout: main
+     content:
+     >
+       <p>Przepraszamy, ale strona, której szukasz jest niedostępna. Czy chcesz przejść do <a href="/">strony głównej</a>
+
+
+default login redirect: '/'
+login panel title: 'Zaloguj się'
+login message: 'Musisz się zalogować'
+wrong password or login message: 'Podałeś zły login lub hasło'
+login field label: 'Login'
+password field label: 'Hasło'
+login button label: 'Zaloguj się &gt;'
+redirect message: 'Powinieneś zostać przekierowany. Jeśli tak się nie stało, kliknij <a href="{redirectUrl}">tutaj</a>.'
+
+
+###
+#Web mud client
+no flash no websockets message: 'Twoja przeglądarka nie obsługuje WebSockets, nie posiada też wtyczki flasha. Aby grać w naszego muda używając klienta na stronie www, zainstaluj wtyczkę Adobe Flash, lub zmień przeglądarkę.'
+flash policy server host: 0.0.0.0
+flash policy port: 843

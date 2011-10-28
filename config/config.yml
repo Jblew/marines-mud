@@ -1,0 +1,282 @@
+include:
+  - ./config/chatterbots.yml
+  - ./config/asciiarts.yml
+  - ./config/dictionaries.yml
+  - ./config/time.yml
+  - ./config/commands.yml
+  - ./config/web.yml
+  - ./config/tap.yml
+
+init message: 'Witaj w BlazeMUD. Musisz chwilę poczekać...'
+
+game title: 'BlazeMUD'
+game subtitle: 'Find your destiny...'
+
+about: 'BlazeMUD is a game created by JBLew (www.jblew.pl) and Progtryk. It is accesible via telnet, web client and a graphics client.'
+
+###
+#Filesystem - directories
+main dir: .
+src dir: ./src
+data dir: ./data
+web dir: ./web;
+webbise progs dir: ./web/website
+img dir: ./web/img
+logs dir: ./data/logs
+gamelogs dir: ./data/logs/gamelogs
+shutdowns dir: ./data/shutdowns
+queries dir: ./data/queries
+progs dir: ./data/./data/progs
+bin dir: ./data/bin
+classes dir: ./data/bin/classes
+gameprogs dir: ./data/bin/classes/game_progs
+config dir: ./config
+world config dir: ./config/world
+tmp dir: ./tmp
+
+#Gamefiles
+gamezip path: ./tmp/gamezip.zip
+game files dir: ./files
+
+#Filesystem - extensions
+progs extension: js
+
+###
+#Networking
+host name: 46.4.143.23
+scl port: 9010
+
+ip blacklist:
+  #z tego adresu probowano wielokrotnie wejsc na serwer z dziwnymi urlami, oraz skanowano porty
+ - '221.194.46.176'
+ 
+geolocation on: true
+exclude from geolocation:
+  - '0.0.0.0'
+  - '127.0.0.1'
+  
+#{ip} is pattern for ip address. Warning! If you change geolocation service you have to change parsing code in TelnetUserThread class.
+geolocation service url: 'http://api.hostip.info/?ip={ip}'
+
+
+###
+#Network notifications
+#Possible values: on, off, auto - on only in production mode
+notifications on: auto
+twitter consumer key: O4lriI66SIdwc0uQSr85g
+twitter consumer secret: lLZUSSqKEezlbycvnmhpiKl25n72RAjfrS6qT0yJg
+twitter access token: 335254074-vyNlLcmMnZC2nfIWE3qwOTOn18d4DoaL17symSKD
+twitter access token secret: X16l1HKz3yjk0lmbU9HYGLHoXPXn19ixfV2Hjpg
+
+
+###
+#People
+main administrator name: Jblew
+main administrator address: jblew@jblew.pl
+
+world supervisor name: Progtryk
+world supervisor address: todo@dodac.adres.progtryka
+
+###
+#Persistence
+world persistence save period: 15min
+
+
+###
+#Dynamic compiler
+compiler debug: false
+dynamic compiler default imports:
+  - pl.jblew.code.jutils.utils.*
+  - pl.jblew.code.jutils.data.containers.tuples.*
+  - pl.jblew.code.jutils.data.containers.tuples.string.*
+  - pl.jblew.code.dynamiccompiler.*
+  - java.util.GregorianCalendar
+  - pl.jblew.code.jutils.jezykpolski.*
+
+
+###
+#Progs
+game progs on: false
+gc after compiling game progs: false
+
+progs engine name: JavaScript
+init prog file: ./data/progs/init.js
+progs header:
+
+
+###
+#Security
+salt length: 20
+salt characters: 1!2@3#4$5%6^7&8*90qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM
+#ATTENTION! If you change the password salt you MUST regenerate all passwords in database. Otherwise nobody will be able to login.
+password salt: 1e23e9ccwa183r5c4q3b7
+
+max connections per second: 45
+max connections per tick: 400
+
+ban host for time: 2h
+
+###
+#Logging
+save logs in test mode: false
+gamelogger max buffer size in lines: 100
+
+
+###
+#Web
+web server host: 0.0.0.0
+web server name: MarinesMud-WebServer
+web server so timeout: 2000
+web server debug: false
+
+website index script: index.html
+website header filename: header.html
+website footer filename: footer.html
+
+
+###
+#Smud
+smud msg string: \\033[
+smud html lt: rddfeinjekfvjjrdff4kerogne7rgvefege
+smud html gt: 5ejytrewbtrdeieorjemklsfoi9rie4rdsd
+smud html variable: SMUD_HTML_LT+"variable id=\"%i\" name=\"%n\" value=\"%v\" /"+SMUD_HTML_GT
+
+
+###
+#National letters mapping
+national letters mapping:
+  - ą: a
+  - Ą: A
+  - ę: e
+  - Ę: E
+  - ó: o
+  - Ó: O
+  - ł: l
+  - Ł: L
+  - ń: n
+  - Ń: N
+  - ś: s
+  - Ś: S
+  - ć: c
+  - Ć: C
+  - ź: z
+  - Ź: Z
+  - ż: z
+  - Ż: Z
+
+###
+#Commands shortcuts
+fast commands shortcuts:
+  - shortcut: "'"
+    command: say
+  - shortcut: ":)"
+    command: usmiech
+  - shortcut: ":-)"
+    command: usmiech
+  - shortcut: ":("
+    command: smutek
+  - shortcut: ":-("
+    command: smutek
+  - shortcut: \
+    command: immtalk
+  - shortcut: ":"
+    command: immtalk
+
+
+###
+#Gameplay config
+prompt delay ms: 25
+prompt template:
+
+display room texts frequency: 4t
+display room texts probability: 0.07
+
+
+###
+#World
+#user is moved to central room when an error occurs and system cannot determine his localisation. It occurs eg. when room is deleted.
+central room vnum: 1
+#60s * 60m * 24h
+world reset frequency s: 86400
+
+
+###
+#Map
+map x size: 10
+map y size: 10
+current location sign:  \{B0{x
+
+
+###
+#Rent
+item cost per rent day factor: 0.3
+
+
+###
+#Fight
+fight prompt display delay ms: 3500
+flee probability: 0.9
+cannot flee message: Wpadasz w panikę! Nie udaje ci się uciec!
+injuries tresholds:
+  - level: 0
+    name: Zdrowy
+    coloured name: \{GZdrowy{x
+  - level: 0.25
+    name: Podrapany
+    coloured name: \{gPodrapany{x
+  - level: 0.5
+    name: Posiniaczony
+    coloured name: \{yPosiniaczony{x
+  - level: 0.79
+    name: Zbity
+    coloured name: \{rZbity{x
+  - level: 0.9
+    name: Umierający
+    coloured name: \{RUmierający{x
+  - level: 1
+    name: Martwy
+    coloured name: \{R***Martwy***{x
+
+
+###
+#Levels
+levels count: 30
+
+min mv to go: 5
+
+#zmienic na minitick
+mv hp increment frequency: 1u
+mv hp rest increment factor: 1.3
+mv hp sleep increment factor: 2
+
+#zmienic na minitick
+starvation thirst increment frequency: 5t
+starvation increment value: 0.005
+thirst increment value: 0.005
+
+starvation alarm level: 0.75
+thirst alarm level: 0.75
+starvation death alarm level: 0.93
+thirst death alarm level: 0.93
+starvation death level: 0.97
+thirst death level: 0.97
+
+
+###
+#Weather
+clouds count: 2
+cloud change probability: 0.02
+weather change frequency: 2t
+weather change probability: 0.3
+
+
+###
+#Messages
+bad character message: '{RUwaga!{x{x Wprowadziłeś do tego świata nieznany znak, symbol, literę. Nie rób tego więcej, aby nie skupić na sobie gniewu bezimiennych!{x'
+type your name: 'Podaj swoje imie wedrowcze: '
+multiple login msg: '{RUwaga!{x{X Jestes juz zalogowany. Mozesz jednak wylogowac sie z obu sesji i zalogowac sie ponownie do muda.'
+
+###
+#Languages
+# So far there are two languages: EN and PL.
+admin panel language: PL

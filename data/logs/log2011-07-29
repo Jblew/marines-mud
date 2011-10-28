@@ -1,0 +1,158 @@
+2011-07-29 13:05:07 marinesmud.system.stores.VariablesManager set
+SEVERE: Validator exception in variable "exp" for value "hehe".
+pl.jblew.code.simplevalidator.WrongTypeException: Ta wartość musi być liczbą całkowitą! [Podano hehe].
+	at pl.jblew.code.simplevalidator.Validator.isValid(Validator.java:159)
+	at marinesmud.system.stores.VariablesManager.setThrowingValidatorException(VariablesManager.java:164)
+	at marinesmud.system.stores.VariablesManager.set(VariablesManager.java:184)
+	at marinesmud.game.gameplay.commands.DebugCommands.gval(DebugCommands.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at marinesmud.game.gameplay.commands.CommandRouter.command(CommandRouter.java:245)
+	at marinesmud.game.gameplay.GamePlayManager.playGame(GamePlayManager.java:106)
+	at marinesmud.game.gameplay.MudUser.playGame(MudUser.java:119)
+	at marinesmud.system.io.TelnetUserThread.run(TelnetUserThread.java:115)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:679)
+2011-07-29 13:05:32 marinesmud.game.gameplay.commands.CommandRouter command
+SEVERE: null
+marinesmud.lib.chucknorris.ChuckNorrisRuntimeException: Wygenerowany błąd.
+	at marinesmud.game.gameplay.commands.DebugCommands.gbug(DebugCommands.java:133)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at marinesmud.game.gameplay.commands.CommandRouter.command(CommandRouter.java:245)
+	at marinesmud.game.gameplay.GamePlayManager.playGame(GamePlayManager.java:106)
+	at marinesmud.game.gameplay.MudUser.playGame(MudUser.java:119)
+	at marinesmud.system.io.TelnetUserThread.run(TelnetUserThread.java:115)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:679)
+2011-07-29 13:05:35 marinesmud.system.stores.VariablesManager set
+SEVERE: Validator exception in variable "exp" for value "hehe".
+pl.jblew.code.simplevalidator.WrongTypeException: Ta wartość musi być liczbą całkowitą! [Podano hehe].
+	at pl.jblew.code.simplevalidator.Validator.isValid(Validator.java:159)
+	at marinesmud.system.stores.VariablesManager.setThrowingValidatorException(VariablesManager.java:164)
+	at marinesmud.system.stores.VariablesManager.set(VariablesManager.java:184)
+	at marinesmud.game.gameplay.commands.DebugCommands.gval(DebugCommands.java:140)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at marinesmud.game.gameplay.commands.CommandRouter.command(CommandRouter.java:245)
+	at marinesmud.game.gameplay.GamePlayManager.playGame(GamePlayManager.java:106)
+	at marinesmud.game.gameplay.MudUser.playGame(MudUser.java:119)
+	at marinesmud.system.io.TelnetUserThread.run(TelnetUserThread.java:115)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:679)
+2011-07-29 13:05:37 marinesmud.game.gameplay.commands.CommandRouter command
+SEVERE: null
+marinesmud.lib.chucknorris.ChuckNorrisRuntimeException: Wygenerowany błąd.
+	at marinesmud.game.gameplay.commands.DebugCommands.gbug(DebugCommands.java:133)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at marinesmud.game.gameplay.commands.CommandRouter.command(CommandRouter.java:245)
+	at marinesmud.game.gameplay.GamePlayManager.playGame(GamePlayManager.java:106)
+	at marinesmud.game.gameplay.MudUser.playGame(MudUser.java:119)
+	at marinesmud.system.io.TelnetUserThread.run(TelnetUserThread.java:115)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+	at java.lang.Thread.run(Thread.java:679)
+2011.07.29 23:56:36 [main] info> [SERVER START] RUN MODE: ***PRODUCTION***
+2011.07.29 23:56:37 [main] notice> SourceScanner   Scanning source and finding Todo in code is off, because scanning classes invokes constructors of iner classes. Why?!
+2011.07.29 23:56:37 [Web-server-main-thread1] info> Webserver starting up on host 0.0.0.0, port 9001
+2011.07.29 23:56:37 [flash-policy-server-thread-2] info> Flash policy server listening on 0.0.0.0 9005.
+2011.07.29 23:56:37 [flash-policy-server-thread-2] info> Waiting for connection to flash policy server...
+2011.07.29 23:56:38 [main] info> Compiling GameProgs... Please wait patiently, this may take a while.
+2011.07.29 23:56:38 [main] info> Compiling GameProgs finished. Compiling 1 progs took 109ms.
+2011.07.29 23:56:38 [main] info> Notifications are ENABLED.
+2011.07.29 23:56:39 [main] info> Twitter: Successfully updated the status to [2011/6/29 BlazeMud znowu działa! :) Przypominamy, że aby się zalogować, musicie podać host: 91.228.197.133 i port 9000. Miłej gry!].
+2011.07.29 23:56:39 [telnet-server-thread-27] info> TelnetServerMode: NOT BLOCKING
+2011.07.29 23:56:39 [telnet-server-thread-27] info> Listening on 0.0.0.0 9000; Host name: 91.228.197.133
+2011.07.29 23:56:39 [telnet-server-thread-27] info> Waiting for telnet connection...
+2011.07.29 23:56:41 [Tickers-cached-3] notice> Tickers.checkMiniTickables   MiniTick period: 1956ms; Suspected: 2000ms; Error: 44ms.
+2011.07.29 23:57:00 [Web-server-main-thread1] info> [www] /admin
+2011.07.29 23:57:00 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:05 [Web-server-main-thread1] info> [www] /admin?wlowginfield=jblew&wpaswsrtwhordfield=jblew&wredirwgwefect=admin
+2011.07.29 23:57:05 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:05 [Web-server-main-thread1] info> [www] /admin
+2011.07.29 23:57:06 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:08 [Web-server-main-thread1] info> [www] /admin?action=power
+2011.07.29 23:57:08 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:09 [Web-server-main-thread1] info> [www] /admin?action=logs
+2011.07.29 23:57:09 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:10 [Tickers-cached-22] notice> Tickers.checkMicroTickables   MicroTick period: 222ms; Suspected: 200ms; Error: 22ms.
+2011.07.29 23:57:10 [Web-server-main-thread1] info> [www] /admin?action=logs&method=current
+2011.07.29 23:57:11 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:14 [Web-server-main-thread1] info> [www] /admin?action=power
+2011.07.29 23:57:14 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:16 [Web-server-main-thread1] info> [www] /admin?action=power&method=restart
+2011.07.29 23:57:16 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:18 [Web-server-main-thread1] info> [www] /admin?action=power&method=restart&parameter=&parameter2=&confirmation=true
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Stop socket server
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Received signal to shutdown ConsoleReader
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Closing ConsoleReader's BufferedReader(System.in).
+2011.07.29 23:57:18 [Web-server-main-thread1] notice>    Server is now changing the System.in stream. Normal stream will be restored after a while.
+2011.07.29 23:57:18 [Web-server-main-thread1] info> System.in has been succesfully changed.
+2011.07.29 23:57:18 [Web-server-main-thread1] info> System.in has been succesfully restored.
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Finished ConsoleReader's shutdown method.
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Stop socket server
+2011.07.29 23:57:18 [Web-server-main-thread1] info> Shutdown finished. Bye!
+2011.07.29 23:57:18 [flash-policy-server-thread-2] info> Stop socket server
+2011.07.29 23:57:18 [flash-policy-server-thread-2] info> Quit socket server
+2011.07.29 23:57:18 [telnet-server-thread-27] info> Stop socket server
+2011.07.29 23:57:18 [telnet-server-thread-27] info> Quit socket server
+2011.07.29 23:57:19 [Web-server-main-thread1] info> Twitter: Successfully updated the status to [2011/6/29 Niestety musimy zrestartować muda. :(Za chwile wznowimy grę i poinformujemy was o tym. :)].
+2011.07.29 23:57:19 [main] info> [SERVER START] RUN MODE: ***PRODUCTION***
+2011.07.29 23:57:20 [main] notice> SourceScanner   Scanning source and finding Todo in code is off, because scanning classes invokes constructors of iner classes. Why?!
+2011.07.29 23:57:20 [Web-server-main-thread1] info> Webserver starting up on host 0.0.0.0, port 9001
+2011.07.29 23:57:20 [flash-policy-server-thread-2] info> Flash policy server listening on 0.0.0.0 9005.
+2011.07.29 23:57:20 [flash-policy-server-thread-2] info> Waiting for connection to flash policy server...
+2011.07.29 23:57:20 [main] info> Compiling GameProgs... Please wait patiently, this may take a while.
+2011.07.29 23:57:21 [main] info> Compiling GameProgs finished. Compiling 1 progs took 131ms.
+2011.07.29 23:57:21 [main] info> Notifications are ENABLED.
+2011.07.29 23:57:21 [main] info> Twitter: Successfully updated the status to [2011/6/29 11:57/21 BlazeMud znowu działa! :) Przypominamy, że aby się zalogować, musicie podać host: 91.228.197.133 i port 9000. Miłej gry!].
+2011.07.29 23:57:22 [telnet-server-thread-25] info> TelnetServerMode: NOT BLOCKING
+2011.07.29 23:57:22 [telnet-server-thread-25] info> Listening on 0.0.0.0 9000; Host name: 91.228.197.133
+2011.07.29 23:57:22 [telnet-server-thread-25] info> Waiting for telnet connection...
+2011.07.29 23:57:26 [Web-server-main-thread1] info> [www] /admin?action=power&method=restart&parameter=&parameter2=&confirmation=true
+2011.07.29 23:57:26 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:31 [Web-server-main-thread1] info> [www] /play
+2011.07.29 23:57:31 [Web-server-main-thread1] info> [www] /css/admin/stylesheet.css
+2011.07.29 23:57:53 [console-reader-thread-20] info> Finished ConsoleReader
+2011.07.29 23:57:53 [console-reader-thread-20] info> ConsoleReader invoking server shutdown method.
+2011.07.29 23:57:53 [console-reader-thread-20] info> Stop socket server
+2011.07.29 23:57:53 [console-reader-thread-20] info> Received signal to shutdown ConsoleReader
+2011.07.29 23:57:53 [console-reader-thread-20] info> Closing ConsoleReader's BufferedReader(System.in).
+2011.07.29 23:57:53 [console-reader-thread-20] notice>    Server is now changing the System.in stream. Normal stream will be restored after a while.
+2011.07.29 23:57:53 [console-reader-thread-20] info> System.in has been succesfully changed.
+2011.07.29 23:57:53 [console-reader-thread-20] info> System.in has been succesfully restored.
+2011.07.29 23:57:53 [console-reader-thread-20] info> Finished ConsoleReader's shutdown method.
+2011.07.29 23:57:53 [console-reader-thread-20] info> Stop socket server
+2011.07.29 23:57:53 [telnet-server-thread-25] info> Stop socket server
+2011.07.29 23:57:53 [telnet-server-thread-25] info> Quit socket server
+2011.07.29 23:57:53 [console-reader-thread-20] info> Shutdown finished. Bye!
+2011.07.29 23:57:53 [flash-policy-server-thread-2] info> Stop socket server
+2011.07.29 23:57:53 [flash-policy-server-thread-2] info> Quit socket server
+2011.07.29 23:57:54 [console-reader-thread-20] severe> NotificationProviders.twitter   null
+twitter4j.TwitterException - 403:The request is understood, but it has been refused. An accompanying error message will explain why. This code is used when requests are being denied due to update limits (http://support.twitter.com/forums/10711/entries/15364).
+error - Status is a duplicate.
+request - /1/statuses/update.json
+
+	at twitter4j.internal.http.HttpClientImpl.request(HttpClientImpl.java:189)
+	at twitter4j.internal.http.HttpClientWrapper.request(HttpClientWrapper.java:65)
+	at twitter4j.internal.http.HttpClientWrapper.post(HttpClientWrapper.java:102)
+	at twitter4j.TwitterImpl.post(TwitterImpl.java:1871)
+	at twitter4j.TwitterImpl.updateStatus(TwitterImpl.java:459)
+	at marinesmud.lib.NotificationProviders$1.abstractPostMessage(NotificationProviders.java:61)
+	at marinesmud.lib.NotificationProviders.postMessage(NotificationProviders.java:95)
+	at marinesmud.system.shutdown.MudShutdown.shutdown(MudShutdown.java:93)
+	at marinesmud.system.ConsoleReader$Runner.run(ConsoleReader.java:131)
+	at java.lang.Thread.run(Thread.java:636)
+

@@ -1,0 +1,25 @@
+<h2>Obiekty</h2>
+<a href="/autoeditor?mpage=newobject">Dodaj nowy obiekt</a>
+<table class="editor_items_table">
+	<tr>
+		<th>Vnum</th>
+		<th>Nazwa</th>
+		<th>Typ</th>
+		<th>Pasywna akcja</th>
+		<th style="width: 15%;">Opcje</th>
+	</tr>
+	<%
+		var objects = World.getObjects();
+		for(i in objects) {
+			var mudobject = objects[i];
+			web.out.println("<tr>");
+
+			web.out.println("<td>"+mudobject.getVnum()+"</td>");
+			web.out.println("<td>"+mudobject.getName()+"</td>");
+			web.out.println("<td>"+mudobject.getTypeName()+"</td>");
+			web.out.println("<td>"+mudobject.getPassiveAction()+"</td>");
+			web.out.println("<td><a href=\"/autoeditor?mpage=editobject&objectid="+mudobject.getVnum()+"\">Edytuj</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript: if(confirm('Czy chcesz usunąć ten object?')) { window.location.href='/autoeditor?mpage=deleteobject&objectid="+mudobject.getVnum()+"'; }\">Usuń</a></td>");
+			web.out.println("</tr>");
+		}
+	%>
+</table>

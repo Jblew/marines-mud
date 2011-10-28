@@ -1,0 +1,176 @@
+###
+#Real time NTP Synchronization
+synchronize: true
+ntp servers:
+  - 'tempus1.gum.gov.pl'
+  - 'tempus2.gum.gov.pl'
+ntp timeout ms: 8000
+synchronization period: 24h
+
+###
+#Time
+#1 real millisecond = x mud milliseconds, 1 mud second = x mud milliseconds, 1 mud minute = x mud seconds, etc.
+time multiplayer: 60
+milliseconds in second: 1000
+seconds in minute: 60
+minutes in hour: 60
+hours in day: 24
+days in month: 30
+
+#eras dates are the 'real' dates; Daty er, to 'prawdziwe' daty
+#Order matters in eras!
+eras:
+  #start date of first era is the 'zero' date for mud
+  - name: Prechistoryczna
+    dopelniacz: Prechistorycznej
+    start year: 2009
+    start month: 1
+    start day: 1
+    start hour: 1
+    start minute: 1
+    start second: 1
+
+  - name: Testowa
+    dopelniacz: Testowej
+    start year: 2010
+    start month: 1
+    start day: 1
+    start hour: 1
+    start minute: 1
+    start second: 1
+
+  - name: Budowlana
+    dopelniacz: Budowlanej
+    start year: 2012
+    start month: 1
+    start day: 1
+    start hour: 1
+    start minute: 1
+    start second: 1
+
+months:
+  - mianownik: miesiąc mrozów
+    dopelniacz: miesiąca mrozów
+
+  - mianownik: czas łowów
+    dopelniacz: czasu łowów
+
+  - mianownik: okres roztopów
+    dopelniacz: okresu łowów
+
+  - mianownik: miesiąc powodzi
+    dopelniacz: miesiąca powodzi
+
+  - mianownik: miesiąc kwiecia
+    dopelniacz: miesiąca kwiecia
+
+  - mianownik: okres upałów
+    dopelniacz: okresu upałów
+
+  - mianownik: czas kolorowych liści
+    dopelniacz: czasu kolorowych liści
+
+  - mianownik: okres błota
+    dopelniacz: okresu blota
+
+  - mianownik: miesiąc śnieżnych zawiei
+    dopelniacz: miesiąca śnieżnych zawiei
+
+days of week:
+  - poniedziałek
+  - wtorek
+  - środa
+  - czwartek
+  - piątek
+  - sobota
+  - niedziela
+
+#Order matters in parts of day!
+#For night sun Position is set to -1.
+parts of day:
+  - name: night
+    sun position: -1
+    messages:
+      - Słońce zachodzi za horyzont.
+      - Zaczyna się noc.
+    add to room description probability: 0.0
+    room descriptions:
+      - Jest ciemno.
+
+  - name: morning
+    sun position: 0
+    messages:
+      - Robi sie szaro. To znak, ze za chwile nadejdzie nowy dzien.
+      - Z każdą chwilą robi się jaśniej. Nadchodzi poranek.
+    add to room description probability: 0.75
+    room descriptions:
+      - Słońce z wolna unosi się nad horyzont.
+
+  - name: day
+    sun position: 0.15
+    messages:
+      - Słońce wschodzi i po chwili jest całkiem jasno.
+      - Jest już całkiem jasno.
+    add to room description probability: 0.2
+    room descriptions:
+      - Świeci słońce.
+
+  - name: evening
+    sun position: 0.85
+    messages:
+      - Robi sie szaro. Pewnie niedlugo zajdzie slonce.
+      - Nadchodzi wieczór.
+    add to room description probability: 0.6
+    room descriptions:
+      - Słońce chowa się za horyzontem wydłużając powoli cienie.
+
+poetic time representation:
+>
+  
+
+time command response:
+>
+  String out = "Jest "+date.getDayOfWeekName()+", "
+    +PolskieLiczby.liczebnikPorzadkowy(date.getDayOfMonth())
+    +" dzień "+date.getMonthName().second
+    +", "+PolskieLiczby.liczebnikPorzadkowy(date.getYearOfEra())
+    +" rok ery "+date.getEra().dopelniacz+".\n";
+    
+  out += date.getPoeticTimeRepresentation();
+
+  return out;
+
+
+###
+#Sun cycle
+longest day day: 5
+longest day month: 3
+
+#Difference between longest and shortest day in month (implement this)
+day length amplitude in hours: 5
+
+
+###
+#Tickers
+scheduled threads: 2
+max scheduled threads: 3
+
+
+milliseconds in microtick: 200
+microticks in minitick: 10
+miniticks in tick: 30
+
+max tick error ms: 1
+display tickers alerts: false
+
+increase scheduled pool size: true
+increase core pool size if error balance exceedes: 0.8
+
+
+###
+#Timed actions
+gc frequency unit: MINUTES
+gc frequency value: 10
+
+test db connection frequency unit: MINUTES
+test db connection frequency value: 1

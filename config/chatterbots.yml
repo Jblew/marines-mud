@@ -1,0 +1,18 @@
+chatterbots:
+  - name: Innkeeper
+    response probability: 0.8
+    knowledge elements:
+      - type: special
+        keys:
+          - hej
+          - czesc
+          - witajcie
+          - witaj
+        responder:
+          type: random array
+          elements:
+            - 'Witaj, %s!'
+            - 'Zapraszam, %s!'
+            - 'Witamy w karczmie!'
+            - 'Witaj!'
+            - 'Zapraszam!'

@@ -1,0 +1,71 @@
+dictionaries:
+  #sprawdzic, czy w iso i won sa te dziwne znaki
+  ancient letter transforms:
+    a: ë
+    ą: e
+    b: k
+    c: e
+    ć: c
+    d: z
+    e: i
+    ę: ï
+    f: f
+    g: h
+    h: b
+    i: o
+    j: ö
+    k: j
+    l: m
+    ł: l
+    m: k
+    n: n
+    ń: n
+    o: a
+    ó: ä
+    p: r
+    q: w
+    r: s
+    s: z
+    ś: p
+    t: t
+    u: ö
+    w: v
+    v: w
+    x: a
+    y: ö
+    z: z
+    ź: y
+    ż: b
+
+  human:
+    say: say
+    says: says
+    yield: yield
+    yields: yields
+
+  elf:
+    say: sing
+    says: sings
+    yield: yield
+    yields: yields
+
+  dwarf:
+    say: say
+    says: says
+    yield: yield
+    yields: yields
+
+  main:
+    immortal channel description: 'Kanał do rozmów między nieśmiertelnymi. Komenda: immtalk'
+    immortal channel after message: 'Aby wyłączyć ten kanał wpisz {Xchannel immortal off{x.'
+
+    event channel description: 'Kanał z wiadomościami o świętach, zabawach i uroczystościach w świecie'
+    event channel after message: 'Aby wyłączyć ten kanał wpisz {Xchannel event off{x.'
+
+    hints channel description: 'Kanał z poradami, szczególnie dla początkujących.'
+    hints channel after message: 'Aby wyłączyć ten kanał wpisz {Xchannel hints off{x.'
+
+  twitter messages:
+    shutdown: 'Przepraszamy, ale musimy wylączyć muda na chwilę. Gdy go włączymy, poinformujemy was o tym. :)'
+    start: 'BlazeMud znowu działa! :) Przypominamy, że aby się zalogować, musicie podać host: {host} i port {port}. Miłej gry!'
+    restart: 'Niestety musimy zrestartować muda. :(Za chwile wznowimy grę i poinformujemy was o tym. :)'

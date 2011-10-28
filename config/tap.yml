@@ -1,0 +1,14 @@
+telnet welcome message: 'Witaj w BlazeMUDzie! Poczekaj chwilke, az bedziemy Cie mogli przyjac...'
+telnet welcome wait: 4s
+
+#io delay is in miliseconds
+io delay: 50
+max line length: 3096
+max timeout ticks: 60
+output width: 80
+
+linger on: true
+linger value: 2
+
+server host: 0.0.0.0
+server so timeout ms: 2000

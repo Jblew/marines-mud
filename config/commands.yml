@@ -1,0 +1,3 @@
+commands:
+  todo: move here commands list from CommandRouter class.
+  todo2: Add support for short commands defined here, in config file and compiled on startup.

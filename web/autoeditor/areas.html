@@ -1,0 +1,29 @@
+<h2>Krainy</h2>
+<a href="/autoeditor?mpage=newarea">Dodaj nową krainę</a>
+<table class="editor_items_table">
+	<tr>
+		<th>Vnum</th>
+		<th>Nazwa</th>
+		<th>Domyślny typ</th>
+		<th>Min room</th>
+		<th>Max room</th>
+		<th>Reset ticks</th>
+		<th style="width: 15%;">Opcje</th>
+	</tr>
+	<%
+		var areas = World.getAreas();
+		for(i in areas) {
+			var area = areas[i];
+			web.out.println("<tr>");
+
+			web.out.println("<td>"+area.getId()+"</td>");
+			web.out.println("<td>"+area.getName()+"</td>");
+			web.out.println("<td>"+area.getDefaultAreaType().getName()+"</td>");
+			web.out.println("<td>"+area.getMinRoom()+"</td>");
+			web.out.println("<td>"+area.getMaxRoom()+"</td>");
+			web.out.println("<td>"+area.getResetTicks()+"</td>");
+			web.out.println("<td><a href=\"/autoeditor?mpage=editarea&areaid="+area.getId()+"\">Edytuj</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"javascript: if(confirm('Czy chcesz usunąć tą krainę?')) { window.location.href='/autoeditor?mpage=deletearea&areaid="+area.getId()+"'; }\">Usuń</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"/autoeditor/?mpage=rooms&showforarea="+area.getId()+"\">Pokaż roomy</a></td>");
+			web.out.println("</tr>");
+		}
+	%>
+</table>

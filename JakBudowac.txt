@@ -1,0 +1,67 @@
+ >====================< MARINESMUD4 Software >====================<
+ 
+ +----------------------------------------------------------------+
+ |         MARINESMUD4 - by Jblew (www.jblew.pl) & Progtryk       |
+ |     Poradnik opisujący proces budowania krain w MARINESMUD4    |
+ |                          AUTOR: Jblew                          |
+ +----------------------------------------------------------------+
+
+WSTEP
+     W tym poradniku postaram się w prosty sposób opisać proces 
+   budowania krain w MARINESMUD4. Nie jest to trudne, jednak trzeba
+   mieć trochę wyobraźni i sporo wolnego czasu. Zanim się zacznie
+   budowanie, warto też poświęcić trochę wolnego czasu na zastano-
+   wienie się i zadanie sobie pytań: Jak ma wyglądać świat w grze?
+   Jaki ma mieć klimat dana kraina? Ma być wesoła, czy może
+   straszna, albo dziwna? etc.
+
+     Budowanie można podzielić, ze względu na to co śię buduje. W
+   chwili tworzenia tego poradnika, możliwe jest budowanie Krain
+   (AREA), Lokalizacji (Room), Przedmiotów (Object), Emocji
+   (Socials), oraz pisanie Pomocy (Help). Postaram się opisać two-
+   rzenie każdej z tych rzeczy, przedstawię też listę wszystkich
+   dostępnych komend. Jeżeli zmienimy coś w kodzie, co wpłynie na
+   opisywane tu rzeczy, zaaktualizuję ten poradnik.
+
+IDENTYFIKACJA
+     Każda kraina, lokalizacja, mob, przedmiot, etc. ma swój
+   unikalny numer VNUM. Tzn, że nie mogą istnieć dwie krainy o
+   tym samym numerze vnum. Natiomast dopuszczalne jest, aby np.
+   istniał mob, o vnumie takim samym jak jakis room, czy kraina.
+   VNUM-y są unikalne w obszarze tych samych rzeczy, np. krain.
+
+CZAS
+     Czas w mudzie nie jest odliczanyw standardowych jednostkach.
+   Zamiast tego, czas jest tu podzielony na TICKi, MINITICKi i 
+   MICROTICKi. Ich czas trwania można zmienić w pliku konfigura-
+   cyjnym 'config/time.yml'. Domyślnie MICROTICK trwa 200ms, 
+   MINITICK - 10 MICROTICKów, a TICK - 30 MINITICKów. Tych jedno-
+   stek czasu używa się np. przy ustalaniu częstotliwości RESETÓw.
+
+RESETY
+     Reset, oznacza usunięcie wszystkich przedmiotów i mobów z
+   lokalizacji, i dodanie tam tych, które były ustawione przy
+   budowaniu. Pomaga to utrzymać porządek i daje gwarancję, że 
+   wszyscy będą mieli szansę na zdobycie ważnych dla rozgrywki
+   przedmiotów, czy zabicie potrzebnych istot.
+
+KRAINY (Area)
+     Krainy opisują pewne obszary, które można naturalnie
+   oddzielić, np. Wioska, Dzielnica Miasta, Las, Równina,
+   Kopalnia, etc. Kraina dzieli się na Lokalizacje (np. Ulica,
+   Sala w karczmie, Kawałek lasu, etc.). Tworząc krainę, ustawiamy
+   jej zakres, czyli numery VNUM roomow, które należą do tej krainy.
+   Np. Jeżeli zakres krainy wynosi 100-250, to znaczy, że wszystkie
+   lokalizacje, o numerach VNUM od 100 do 250 należą do tej krainy.
+
+   Każda kraina ma następujące właściwości:
+     VNUM (vnum) - numer vnum,
+     NAZWA (name) - nazwa krainy,
+     ZAKRES VNUMÓW (vnums range) - zakres vnumów lokalizacji
+       należących do krainy.
+     CZĘSTOTLIWOŚĆ RESETÓW (Resets frequency) - Jak często lokali-
+       zacja ma być resetowana.
+     TEKSTY (Texts) - Zdania, które będą wyświetlane losowo co
+      pewien czas graczowi przebywającemu w krainie.
+      Np.: 'Wokół ciebie szumi las', czy 'Z oddali dobiega odgłos
+      uderzających o skałę kilofów.'
