@@ -5,7 +5,7 @@
 
 package marinesmud.scl;
 
-import marinesmud.game.gameplay.MudUser;
+import marinesmud.world.beings.Player;
 import org.jboss.netty.channel.Channel;
 
 /**
@@ -15,18 +15,18 @@ import org.jboss.netty.channel.Channel;
 public class Client {
     public final Channel channel;
     private boolean loggedIn = false;
-    private MudUser user;
+    private Player player;
 
     public Client(Channel channel) {
         this.channel = channel;
     }
 
-    public synchronized void logIn(MudUser user) {
-        this.user = user;
+    public synchronized void logIn(Player player) {
+        this.player = player;
     }
 
     public synchronized void logOut() {
-        this.user = null;
+        this.player = null;
         this.loggedIn = false;
     }
     
@@ -34,8 +34,8 @@ public class Client {
         return loggedIn;
     }
 
-    public synchronized MudUser getUser() {
-        if(user == null) throw new UnsupportedOperationException("This client is not loggedIn");
-        return user;
+    public synchronized Player getPlayer() {
+        if(player == null) throw new UnsupportedOperationException("This client is not loggedIn");
+        return player;
     }
 }

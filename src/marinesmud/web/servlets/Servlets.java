@@ -14,9 +14,15 @@ import javax.servlet.Servlet;
  * @author jblew
  */
 public class Servlets {
-    public static final Map<Class<? extends Servlet>, String> servlets = new HashMap<Class<? extends Servlet>, String>();
+    public static final Map<String, Class<? extends Servlet>> servlets = new HashMap<String, Class<? extends Servlet>>();
     static {
-        servlets.put(HelloServlet.class, "/hello");
+        servlets.put("/play", PlayServlet.class);
+        servlets.put("/admin", AdminServlet.class);
+        servlets.put("/admin/*", AdminServlet.class);
+        servlets.put("/auth", AuthServlet.class);
+        servlets.put("/who", WhoServlet.class);
+        servlets.put("/editor", EditorServlet.class);
+        servlets.put("/", HelloServlet.class);
     }
 
     private Servlets() {

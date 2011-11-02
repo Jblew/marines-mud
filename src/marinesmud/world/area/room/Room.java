@@ -5,7 +5,6 @@
 package marinesmud.world.area.room;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,22 +23,22 @@ import marinesmud.world.area.Area;
 import marinesmud.world.area.AreaType;
 import marinesmud.world.communication.Message;
 import marinesmud.world.items.Item;
-import marinesmud.world.persistence.MultipleEnityManager;
+import marinesmud.world.persistence.EnityManager;
 import pl.jblew.code.jutils.utils.RandomUtils;
 import pl.jblew.code.libevent.EventManager;
-
 /**
  *
  *  * @author jblew  * @license Kod jest objęty licencją zawartą w pliku LICESNE
  */
-public final class Room extends WorldEnity implements Serializable {
-    @Persistent protected String name = "room name";
-    @Persistent protected String baseText = "room description";
-    @Persistent protected AreaType areaType = AreaType.getDefault();
-    @Persistent protected boolean alwaysBright = false;
-    @Persistent protected boolean alwaysDark = false;
-    @Persistent protected boolean globalWeather = true;
-    @Persistent protected boolean rent = false;
+public final class Room extends WorldEnity {
+    @Persistent private String name = "room name";
+    @Persistent private String baseText = "room description";
+    @Persistent private AreaType areaType = AreaType.getDefault();
+    @Persistent private boolean alwaysBright = false;
+    @Persistent private boolean alwaysDark = false;
+    @Persistent private boolean globalWeather = true;
+    @Persistent private boolean rent = false;
+    @Persistent private FloorType floorType = FloorType.List.DEFAULT.type;
     @Persistent public final Map<Direction, Exit> exits = Collections.synchronizedMap(new HashMap<Direction, Exit>());
     @Persistent public final Map<Class<? extends Item>, Integer> resetItemQuantity = Collections.synchronizedMap(new HashMap<Class<? extends Item>, Integer>());
     @Persistent public final List<Item> items = Collections.synchronizedList(new ArrayList<Item>());
@@ -59,10 +58,6 @@ public final class Room extends WorldEnity implements Serializable {
 
     public Room(int id, File f) {
         super(id, f);
-    }
-
-    @Override
-    protected void destruct() {
     }
 
     public synchronized void sendMessage(Message message) {
@@ -129,6 +124,10 @@ public final class Room extends WorldEnity implements Serializable {
         return areaType;
     }
 
+    public synchronized FloorType getFloorType() {
+        return floorType;
+    }
+
     public synchronized Area getArea() {
         Collection<Area> areas = Area.Manager.getInstance().getElements();
         for (Area a : areas) {
@@ -160,7 +159,7 @@ public final class Room extends WorldEnity implements Serializable {
     }
 
     @Override
-    public MultipleEnityManager<Room> getManager() {
+    public EnityManager<Room> getManager() {
         return Manager.getInstance();
     }
 
@@ -189,7 +188,7 @@ public final class Room extends WorldEnity implements Serializable {
         throw new UnsupportedOperationException("Room needn't casting.");
     }
 
-    public static final class Manager extends MultipleEnityManager<Room> {
+    public static final class Manager extends EnityManager<Room> {
         private Manager() {
             super(Room.class, "room");
         }

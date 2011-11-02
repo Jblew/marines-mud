@@ -294,11 +294,12 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
 
     }
 
-    protected synchronized void _destructFiles() {
+    public synchronized void destruct() {
         File file = new File(DIRNAME + enityName() + "/" + id + EXTENSION);
         if (file.exists()) {
             file.delete();
         }
+        getManager()._remove(this);
     }
 
     @Override
@@ -340,9 +341,7 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
 
     public abstract String getCastTo();
 
-    public abstract MultipleEnityManager<? extends WorldEnity> getManager();
-
-    protected abstract void destruct();
+    public abstract EnityManager<? extends WorldEnity> getManager();
 
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)

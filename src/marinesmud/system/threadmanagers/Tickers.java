@@ -18,6 +18,7 @@ import marinesmud.system.bootstrap.Bootstrap;
 import marinesmud.system.Config;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
+import pl.jblew.code.ccutils.ThreadsManager;
 import pl.jblew.code.jutils.concurrent.SynchronizedDouble;
 import pl.jblew.code.jutils.utils.IdGenerator;
 
@@ -57,7 +58,7 @@ public class Tickers implements Shutdownable {
                 for (Runnable r : tickables.keySet()) {
                     long frequency = tickables.get(r);
                     if (tickNumber.get() % frequency == 0) {
-                        MudThreadManager.execute(r);
+                        ThreadsManager.getGlobal().executeImmediately(r);
                     }
                 }
                 tickNumber.incrementAndGet();
@@ -70,7 +71,7 @@ public class Tickers implements Shutdownable {
                 for (Runnable r : miniTickables.keySet()) {
                     long frequency = miniTickables.get(r);
                     if (miniTickNumber.get() % frequency == 0) {
-                        MudThreadManager.execute(r);
+                        ThreadsManager.getGlobal().executeImmediately(r);
                     }
                 }
                 miniTickNumber.incrementAndGet();
@@ -83,7 +84,7 @@ public class Tickers implements Shutdownable {
                 for (Runnable r : microTickables.keySet()) {
                     long frequency = microTickables.get(r);
                     if (microTickNumber.get() % frequency == 0) {
-                        MudThreadManager.execute(r);
+                        ThreadsManager.getGlobal().executeImmediately(r);
                     }
                 }
                 microTickNumber.incrementAndGet();
@@ -173,7 +174,7 @@ public class Tickers implements Shutdownable {
         getInstance().scheduledExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                MudThreadManager.execute(r);
+                ThreadsManager.getGlobal().executeImmediately(r);
             }
         }, delay, 1, unit);
     }

@@ -19,25 +19,25 @@ import pl.jblew.code.timeutils.TimeValue;
  * @author jblew
  */
 public class WorldPersistence {
-    private final Set<MultipleEnityManager<?>> managers = new HashSet<MultipleEnityManager<?>>();
+    private final Set<EnityManager<?>> managers = new HashSet<EnityManager<?>>();
     
     private WorldPersistence() {
     }
 
-    public synchronized void registerManager(MultipleEnityManager<?> men) {
+    public synchronized void registerManager(EnityManager<?> men) {
         managers.add(men);
-        System.out.println("Registered MEN to WorldPersistence ("+managers.size()+" managers)!");
+        //S/ystem.out.println("Registered MEN to WorldPersistence ("+managers.size()+" managers)!");
     }
 
     public synchronized void save() {
-        System.out.println("Saving WorldPersistence ("+managers.size()+" managers)!");
-        for(MultipleEnityManager<?> men : managers) {
+        //S/ystem.out.println("Saving WorldPersistence ("+managers.size()+" managers)!");
+        for(EnityManager<?> men : managers) {
             men.save();
         }
     }
 
     public synchronized void init() {
-        System.out.println("Initialized WorldPersistence ("+managers.size()+" managers)!");
+        //S/ystem.out.println("Initialized WorldPersistence ("+managers.size()+" managers)!");
         ThreadsManager.getGlobal().scheduleCyclicTask(new Runnable() {
             public void run() {
                 WorldPersistence.getInstance().save();

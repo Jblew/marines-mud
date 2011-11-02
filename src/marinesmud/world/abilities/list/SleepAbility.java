@@ -16,7 +16,7 @@ import pl.jblew.code.jutils.utils.TextUtils;
  * @author jblew
  */
 public class SleepAbility extends Ability{
-    public void execute(Being b, Object... parameters) throws AbilityExecutionException {
+    public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         switch (b.getPosition()) {
             case SLEEP:
                 throw new AbilityExecutionException("ZZzzzz...");
@@ -25,9 +25,14 @@ public class SleepAbility extends Ability{
                 b.getRoom().sendMessage(new ExceptMeMessage(b, TextUtils.ucfirst(b.getName()) + " falls asleep."));
                 b.setPosition(Position.SLEEP);
         }
+        return null;
     }
 
     public static SleepAbility getInstance() {
-        return (SleepAbility) InstanceHolder.INSTANCE;
+        return InstanceHolder.INSTANCE;
+    }
+
+    private static class InstanceHolder {
+        public static final SleepAbility INSTANCE = new SleepAbility();
     }
 }

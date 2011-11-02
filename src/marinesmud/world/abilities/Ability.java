@@ -11,13 +11,13 @@ import pl.jblew.code.jutils.SingletonObject;
  *
  * @author jblew
  */
-public abstract class Ability extends SingletonObject {
+public abstract class Ability {
     protected Ability() {
-        super();
     }
-    public abstract void execute(Being b, Object... parameters) throws AbilityExecutionException;
+    
+    public abstract Object execute(Being b, Object... parameters) throws AbilityExecutionException;
 
-    public void execute(Being b) throws AbilityExecutionException {
-        execute(b, null);
+    public Object execute(Being b) throws AbilityExecutionException {
+        return execute(b, null);
     }
 }

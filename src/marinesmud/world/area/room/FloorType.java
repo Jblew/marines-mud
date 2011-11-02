@@ -5,13 +5,14 @@
 
 package marinesmud.world.area.room;
 
+import java.io.Serializable;
 import marinesmud.containers.Vector2i;
 
 /**
  *
  * @author jblew
  */
-public class FloorType {
+public class FloorType implements Serializable {
     public final String tilesFile;
     public final Vector2i topTilePosition;
     public final Vector2i middleTilePosition;

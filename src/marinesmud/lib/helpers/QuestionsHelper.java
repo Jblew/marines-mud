@@ -7,8 +7,8 @@ package marinesmud.lib.helpers;
 import java.util.Arrays;
 import java.util.Collection;
 import marinesmud.tap.CloseUserConnectionRuntimeException;
-import marinesmud.tap.Telnet;
-
+import marinesmud.tap.TelnetAsProxyInstance;
+import marinesmud.tap.TelnetServer;
 
 /**
  *
@@ -26,26 +26,31 @@ public class QuestionsHelper {
         private static final QuestionsHelper INSTANCE = new QuestionsHelper();
     }
 
-    public static String prompt(Telnet.CommunicationManager communicationManager, String s) {
-        communicationManager.print(s + " ");
-        return communicationManager.blockingReadLine();
+    public static String prompt(TelnetAsProxyInstance tapi, String s) throws InterruptedException {
+        tapi.print(s + " ");
+        //try {
+            //System.out.println("Before blockingReadLine in prompt");
+            return tapi.blockingReadLine();
+        //} finally {
+        //    System.out.println("After blockingReadLine prompt");
+        //}
     }
 
-    public static boolean booleanPrompt(Telnet.CommunicationManager communicationManager, String msg) {
+    public static boolean booleanPrompt(TelnetAsProxyInstance tapi, String msg) throws InterruptedException {
         String out;
         while (true) {
-            out = prompt(communicationManager, msg + " [t/n] ");
-            if (out.equalsIgnoreCase("t")) {
+            out = prompt(tapi, msg + " [y/n] ");
+            if (out.equalsIgnoreCase("y")) {
                 return true;
             } else if (out.equalsIgnoreCase("n")) {
                 return false;
             } else {
-                communicationManager.println("{rWpisz {Rt{x lub {Rn{x.");
+                tapi.println("{rType {Ry{x lub {Rn{x.");
             }
         }
     }
 
-    public static String prompt(Telnet.CommunicationManager communicationManager, String msg, String[] options) {
+    public static String prompt(TelnetAsProxyInstance tapi, String msg, String[] options) throws InterruptedException {
         String sOptions = "";
         boolean first = true;
         for (String s : options) {
@@ -57,16 +62,16 @@ public class QuestionsHelper {
         }
         String out;
         while (true) {
-            out = prompt(communicationManager, msg + " [" + sOptions + "] ");
+            out = prompt(tapi, msg + " [" + sOptions + "] ");
             if (Arrays.asList(options).contains(out)) {
                 return out;
             } else {
-                communicationManager.println("{xMusisz wybrać jedną z następujących opcji: " + sOptions + ".{x");
+                tapi.println("{xYou have to choos one of the following options: " + sOptions + ".{x");
             }
         }
     }
 
-    public static String prompt(Telnet.CommunicationManager communicationManager, String msg, Collection<String> options) {
+    public static String prompt(TelnetAsProxyInstance tapi, String msg, Collection<String> options) throws InterruptedException {
         String sOptions = "";
         boolean first = true;
         for (String s : options) {
@@ -78,11 +83,11 @@ public class QuestionsHelper {
         }
         String out;
         while (true) {
-            out = prompt(communicationManager, msg + " [" + sOptions + "] ");
+            out = prompt(tapi, msg + " [" + sOptions + "] ");
             if (Arrays.asList(options).contains(out)) {
                 return out;
             } else {
-                communicationManager.println("{xMusisz wybrać jedną z następujących opcji: " + sOptions + ".{x");
+                tapi.println("{xMusisz wybrać jedną z następujących opcji: " + sOptions + ".{x");
             }
         }
     }

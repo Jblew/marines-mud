@@ -14,12 +14,16 @@ import marinesmud.world.beings.Being;
  * @author jblew
  */
 public class GoAbility extends Ability {
-    public void execute(Being b, Object... parameters) throws AbilityExecutionException {
+    public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         if(parameters.length < 1 || !(parameters[0] instanceof Direction)) throw new IllegalArgumentException("GoAbility requires direction parameter.");
-        
+        return null;
     }
 
     public static GoAbility getInstance() {
-        return (GoAbility) InstanceHolder.INSTANCE;
+        return InstanceHolder.INSTANCE;
+    }
+
+    private static class InstanceHolder {
+        public static final GoAbility INSTANCE = new GoAbility();
     }
 }

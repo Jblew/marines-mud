@@ -5,14 +5,12 @@
 package marinesmud.world.beings;
 
 import java.io.File;
-import java.io.Serializable;
 
 /**
  *
  * @author jblew
  */
-public class Mob extends Being implements Serializable {
-    
+public final class Mob extends Being {
     public Mob() {
         super();
     }

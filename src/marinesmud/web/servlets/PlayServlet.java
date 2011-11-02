@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package marinesmud.web.servlets;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ import net.sf.jtpl.Template;
  *
  * @author jblew
  */
-public class HelloServlet extends HttpServlet {
+public class PlayServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter out = res.getWriter();
@@ -31,15 +32,14 @@ public class HelloServlet extends HttpServlet {
 
     private String generatePage() throws Exception {
                 Template tpl = Templates.get("admin");
-                tpl.assign("pageTitle", "Welcome to MARINESMUD");
-                tpl.assign("scripts", "");
+                tpl.assign("pageTitle", "Play MarinesMUD");
+                tpl.assign("scripts", "<link rel=\"stylesheet\" type=\"text/css\" href=\"/resources/css/terminal-colors.css\" />"
+                        + "<link rel=\"stylesheet\" type=\"text/css\" href=\"/resources/decafmud/src/css/decafmud.css\" />"
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"/resources/decafmud/src/css/decafmud-dark.css\" />"
+                + "<script type=\"text/javascript\" src=\"/resources/decafmud/src/js/decafmud.js\"></script>"
+                + "<script type=\"text/javascript\" src=\"/resources/js/play.js\"></script>");
 
-                tpl.assign("pageContent", "<h2>Welcome to MARINESMUD!</h2><p>This sogtware is still in development phase. "
-                        + "If you are interested in it please visit <a href=\"http://code.google.com/p/marines-mud/\">our page on Google Code</a>. If you want to contribute, write to jblew[at]blew.pl.</p>"
-                        + "<ul>"
-                        + "   <li><a href=\"/play\">Play via Telnet</a></li>"
-                        + "   <li><a href=\"/admin\">Go to administration panel</a></li>"
-                        + "</ul>");
+                tpl.assign("pageContent", "<h2>Play</h2><p>&nbsp;</p><div id=\"mud\" role=\"application\"></div>");
                 tpl.parse("main");
                 return (tpl.out());
         }

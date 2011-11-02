@@ -5,7 +5,6 @@
 package marinesmud.world.beings;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.NoSuchElementException;
 import marinesmud.lib.security.PasswordEncryptor;
 import marinesmud.tap.CommunicationMode;
@@ -14,7 +13,7 @@ import marinesmud.tap.CommunicationMode;
  *
  * @author jblew
  */
-public class Player extends Being implements Serializable {
+public final class Player extends Being {
     @Persistent private CommunicationMode preferredCommunicationMode = CommunicationMode.DEFAULT_MODE;
     @Persistent private String passwordHash = PasswordEncryptor.encrypt("test");
     @Persistent private boolean admin = false;
@@ -66,12 +65,20 @@ public class Player extends Being implements Serializable {
         return PasswordEncryptor.encrypt(pass).equalsIgnoreCase(passwordHash);
     }
 
+    public void changePassword(String parameter) {
+        passwordHash = PasswordEncryptor.encrypt(parameter);
+    }
+
     public synchronized boolean isLoggedIn() {
         return loggedIn;
     }
 
     public synchronized boolean isAdmin() {
         return admin;
+    }
+
+    public synchronized void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public synchronized CommunicationMode getPreferredCommunicationMode() {
@@ -83,7 +90,7 @@ public class Player extends Being implements Serializable {
     }
 
     public static boolean exists(String name) {
-        for (Being b : Player.Manager.getInstance().getElements()) {
+        for (Being b : Being.Manager.getInstance().getElements()) {
             if (b instanceof Player) {
                 Player p = (Player) b;
                 if (p.getName().equals(name)) {
@@ -95,7 +102,7 @@ public class Player extends Being implements Serializable {
     }
 
     public static Player getByName(String name) {
-        for (Being b : Player.Manager.getInstance().getElements()) {
+        for (Being b : Being.Manager.getInstance().getElements()) {
             if (b instanceof Player) {
                 Player p = (Player) b;
                 if (p.getName().equals(name)) {

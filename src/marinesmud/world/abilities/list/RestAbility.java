@@ -16,7 +16,7 @@ import pl.jblew.code.jutils.utils.TextUtils;
  * @author jblew
  */
 public class RestAbility extends Ability {
-    public void execute(Being b, Object... parameters) throws AbilityExecutionException {
+    public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         switch (b.getPosition()) {
             case REST:
             case SLEEP:
@@ -26,9 +26,14 @@ public class RestAbility extends Ability {
                 b.getRoom().sendMessage(new ExceptMeMessage(b, TextUtils.ucfirst(b.getName()) + " sits and starts resting."));
                 b.setPosition(Position.REST);
         }
+        return null;
     }
 
     public static RestAbility getInstance() {
-        return (RestAbility) InstanceHolder.INSTANCE;
+        return InstanceHolder.INSTANCE;
+    }
+
+    private static class InstanceHolder {
+        public static final RestAbility INSTANCE = new RestAbility();
     }
 }

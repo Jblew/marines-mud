@@ -9,14 +9,13 @@ import java.util.LinkedList;
 import java.util.List;
 import marinesmud.world.persistence.WorldEnity;
 import marinesmud.world.area.room.Room;
-import marinesmud.world.persistence.MultipleEnityManager;
-
+import marinesmud.world.persistence.EnityManager;
 /**
  *
  *  * @author jblew  * @license Kod jest objęty licencją zawartą w pliku LICESNE
  */
 public final class Area extends WorldEnity {
-    @Persistent private String name = "area name";
+@Persistent private String name = "area name";
     @Persistent private AreaType defaultAreaType = AreaType.getDefault();
     @Persistent private int minRoom = 0;
     @Persistent private int maxRoom = 0;
@@ -41,31 +40,37 @@ public final class Area extends WorldEnity {
     public Area(int id, File f) {
         super(id, f);
     }
-    
-    protected void destruct() {
+
+    @Override
+    public void destruct() {
+        super.destruct();
+        List<Room> rooms = getRooms();
+        for(Room r : rooms.subList(0, rooms.size())) {
+            r.destruct();
+        }
     }
 
-    public String getName() {
+    public synchronized String getName() {
         return name;
     }
 
-    public AreaType getDefaultAreaType() {
+    public synchronized AreaType getDefaultAreaType() {
         return defaultAreaType;
     }
 
-    public int getMinRoom() {
+    public synchronized int getMinRoom() {
         return minRoom;
     }
 
-    public int getMaxRoom() {
+    public synchronized int getMaxRoom() {
         return maxRoom;
     }
 
-    public int getResetsFrequencyInTicks() {
+    public synchronized int getResetsFrequencyInTicks() {
         return resetsFrequencyInTicks;
     }
 
-    public List<Room> getRooms() {
+    public synchronized List<Room> getRooms() {
         List<Room> out = new LinkedList<Room>();
 
         for (Room r : Room.Manager.getInstance().getElements()) {
@@ -82,12 +87,12 @@ public final class Area extends WorldEnity {
         this.maxRoom = max;
     }
 
-    public String[] getTexts() {
+    public synchronized String[] getTexts() {
         return texts;
     }
 
     @Override
-    public MultipleEnityManager<Area> getManager() {
+    public synchronized EnityManager<Area> getManager() {
         return Manager.getInstance();
     }
 
@@ -111,7 +116,7 @@ public final class Area extends WorldEnity {
         throw new UnsupportedOperationException("Area needn't casting.");
     }
 
-    public static final class Manager extends MultipleEnityManager<Area> {
+    public static final class Manager extends EnityManager<Area> {
         private Manager() {
             super(Area.class, "area");
         }

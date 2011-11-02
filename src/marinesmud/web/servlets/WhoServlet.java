@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package marinesmud.web.servlets;
 
 import java.io.IOException;
@@ -11,13 +12,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import marinesmud.web.servlets.templates.Templates;
+import marinesmud.world.beings.Being;
+import marinesmud.world.beings.Player;
 import net.sf.jtpl.Template;
 
 /**
  *
  * @author jblew
  */
-public class HelloServlet extends HttpServlet {
+public class WhoServlet  extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         PrintWriter out = res.getWriter();
@@ -31,15 +34,20 @@ public class HelloServlet extends HttpServlet {
 
     private String generatePage() throws Exception {
                 Template tpl = Templates.get("admin");
-                tpl.assign("pageTitle", "Welcome to MARINESMUD");
-                tpl.assign("scripts", "");
+                tpl.assign("pageTitle", "Who is online");
 
-                tpl.assign("pageContent", "<h2>Welcome to MARINESMUD!</h2><p>This sogtware is still in development phase. "
-                        + "If you are interested in it please visit <a href=\"http://code.google.com/p/marines-mud/\">our page on Google Code</a>. If you want to contribute, write to jblew[at]blew.pl.</p>"
-                        + "<ul>"
-                        + "   <li><a href=\"/play\">Play via Telnet</a></li>"
-                        + "   <li><a href=\"/admin\">Go to administration panel</a></li>"
-                        + "</ul>");
+                String alllist = "";
+                String onlinelist = "";
+                
+                for(Being b : Being.Manager.getInstance().getElements()) {
+                    if(b instanceof Player) {
+                        Player p = (Player)b;
+                        alllist += "<li>"+p.getName()+(p.isAdmin()? " (immortal)" : "")+(p.isLoggedIn()? " (online)" : "")+(p.isPlaying()? " (playing)" : "")+"</li>";
+                        if(p.isLoggedIn()) onlinelist += "<li>"+p.getName()+(p.isAdmin()? " (immortal)" : "")+(p.isPlaying()? " (playing)" : "")+"</li>";
+                    }
+                }
+
+                tpl.assign("pageContent", "<h2>Who is online</h2><p><ul>"+onlinelist+"</ul></p><h2>All users</h2><p><ul>"+alllist+"</ul></p>");
                 tpl.parse("main");
                 return (tpl.out());
         }

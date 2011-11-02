@@ -5,9 +5,9 @@
 package marinesmud.world.items;
 
 import java.io.File;
-import marinesmud.world.persistence.MultipleEnityManager;
+import marinesmud.world.items.Item;
+import marinesmud.world.persistence.EnityManager;
 import marinesmud.world.persistence.WorldEnity;
-
 /**
  *
  *  * @author jblew  * @license Kod jest objęty licencją zawartą w pliku LICESNE
@@ -32,10 +32,6 @@ public abstract class Item extends WorldEnity {
         super(id, f);
     }
 
-    @Override
-    protected void destruct() {
-    }
-
     public String getPassiveAction() {
         return "lie";
     }
@@ -53,8 +49,8 @@ public abstract class Item extends WorldEnity {
     }
 
     @Override
-    public MultipleEnityManager<Item> getManager() {
-        return Manager.getInstance();
+    public EnityManager<Item> getManager() {
+        return Item.Manager.getInstance();
     }
 
     @Override
@@ -72,17 +68,17 @@ public abstract class Item extends WorldEnity {
         return true;
     }
 
-    private static final class Manager extends MultipleEnityManager<Item> {
-        private Manager() {
-            super(ItemCaster.getInstance(), "item");
-        }
-
-        public static Manager getInstance() {
-            return InstanceHolder.INSTANCE;
-        }
-
-        private static class InstanceHolder {
-            public static final Manager INSTANCE = new Manager();
-        }
+    public static final class Manager extends EnityManager<Item> {
+    private Manager() {
+        super(ItemCaster.getInstance(), "item");
     }
+
+    public static Manager getInstance() {
+        return InstanceHolder.INSTANCE;
+    }
+
+    private static class InstanceHolder {
+        public static final Manager INSTANCE = new Manager();
+    }
+}
 }

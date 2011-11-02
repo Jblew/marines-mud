@@ -13,7 +13,6 @@ import marinesmud.world.area.ExitType;
  * @author jblew
  */
 public class Exit implements Serializable {
-    private static final long serialVersionUID = 6548701865938129164L;
     private int targetId;
     private final String name;
     private final ExitType type;

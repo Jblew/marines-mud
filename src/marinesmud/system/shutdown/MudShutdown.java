@@ -19,7 +19,9 @@ import marinesmud.lib.NotificationProviders;
 import marinesmud.system.bootstrap.Bootstrap;
 import marinesmud.world.World;
 import marinesmud.world.communication.MessageToEverybody;
+import pl.jblew.code.ccutils.ThreadsManager;
 import pl.jblew.code.jutils.utils.IdGenerator;
+import pl.jblew.code.timeutils.TimeValue;
 
 /**
  *
@@ -34,6 +36,11 @@ public class MudShutdown {
     private final static int RESTART_CODE = 4;
 
     private MudShutdown() {
+        shutdownables.add(new Shutdownable() {
+            public void shutdown() {
+                ThreadsManager.getGlobal().shutdown(TimeValue.valueOf("100ms"));
+            }
+        });
     }
 
     private static MudShutdown getInstance() {

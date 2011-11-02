@@ -5,14 +5,13 @@
 package marinesmud.world;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import marinesmud.lib.help.HelpTopic;
-import marinesmud.world.persistence.MultipleEnityManager;
+import marinesmud.world.persistence.EnityManager;
 import marinesmud.world.persistence.WorldEnity;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
@@ -23,7 +22,7 @@ import pl.jblew.code.libevent.EventManager;
  *
  *  * @author jblew  * @license Kod jest objęty licencją zawartą w pliku LICESNE
  */
-public class World extends WorldEnity implements Shutdownable, Serializable {
+public final class World extends WorldEnity implements Shutdownable {
     @Persistent private List<String> reports = new LinkedList<String>();
     @Persistent public List<String> twitterMessages = Collections.synchronizedList(new LinkedList<String>());
     @Persistent public final Map<Integer, HelpTopic> helpTopics = new HashMap<Integer, HelpTopic>();
@@ -32,6 +31,7 @@ public class World extends WorldEnity implements Shutdownable, Serializable {
     private World() {
         super();
     }
+
     private World(int id) {
         super(id);
         MudShutdown.registerShutdownable(this);
@@ -40,11 +40,6 @@ public class World extends WorldEnity implements Shutdownable, Serializable {
     private World(int id, File f) {
         super(id, f);
         MudShutdown.registerShutdownable(this);
-    }
-
-        @Override
-    protected void destruct() {
-
     }
 
     public void shutdown() {
@@ -75,7 +70,7 @@ public class World extends WorldEnity implements Shutdownable, Serializable {
     }
 
     @Override
-    public MultipleEnityManager<? extends WorldEnity> getManager() {
+    public EnityManager<World> getManager() {
         return Manager.getInstance();
     }
 
@@ -108,7 +103,11 @@ public class World extends WorldEnity implements Shutdownable, Serializable {
         return InstanceHolder.INSTANCE;
     }
 
-    private static final class Manager extends MultipleEnityManager<World> {
+    private static class InstanceHolder {
+        public static final World INSTANCE = new World(0);
+    }
+
+    private static final class Manager extends EnityManager<World> {
         private Manager() {
             super(World.class, "world");
         }
@@ -120,9 +119,5 @@ public class World extends WorldEnity implements Shutdownable, Serializable {
         private static class InstanceHolder {
             public static final Manager INSTANCE = new Manager();
         }
-    }
-
-    private static class InstanceHolder {
-        public static final World INSTANCE = new World(0);
     }
 }

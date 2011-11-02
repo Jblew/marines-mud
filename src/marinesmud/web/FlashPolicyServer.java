@@ -19,7 +19,7 @@ import marinesmud.lib.security.MudSecurityManager;
 import marinesmud.system.Config;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
-import marinesmud.system.threadmanagers.MudThreadManager;
+import pl.jblew.code.ccutils.ThreadsManager;
 import pl.jblew.code.jutils.utils.IdGenerator;
 
 /**
@@ -27,6 +27,21 @@ import pl.jblew.code.jutils.utils.IdGenerator;
  * @author jblew
  */
 public class FlashPolicyServer /*extends AbstractEventManager<ConnectionAccepted>*/ {
+    public final String POLICY = "<?xml version=\"1.0\"?>\n"
+            + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">\n"
+            + "\n"
+            + "<!-- Policy file for xmlsocket://socks.example.com -->\n"
+            + "<cross-domain-policy> \n"
+            + "\n"
+            + "   <!-- This is a master socket policy file -->\n"
+            + "   <!-- No other socket policies on the host will be permitted -->\n"
+            + "   <site-control permitted-cross-domain-policies=\"master-only\"/>\n"
+            + "\n"
+            + "   <!-- Instead of setting to-ports=\"*\", administrator's can use ranges and commas -->\n"
+            + "   <allow-access-from domain=\"" + (Main.getRunMode() == RunMode.TEST ? "127.0.0.1" : Config.get("host name")) + "\" to-ports=\"" + Main.MUD_PORT + "\" />\n"
+            + "\n"
+            + "</cross-domain-policy>\n"
+            + "";
 
     public static void start(ServerSocketChannel flashPolicySocketChannel) {
         getInstance()._start(flashPolicySocketChannel);
@@ -45,42 +60,24 @@ public class FlashPolicyServer /*extends AbstractEventManager<ConnectionAccepted
 
     /*public class ConnectionAccepted implements Event {
 
-        public final SocketChannel socketChannel;
+    public final SocketChannel socketChannel;
 
-        public ConnectionAccepted(SocketChannel socketChannel) {
-            this.socketChannel = socketChannel;
-        }
+    public ConnectionAccepted(SocketChannel socketChannel) {
+    this.socketChannel = socketChannel;
+    }
     }*/
-
     private static class FlashPolicySenderHolder {
-
         private static final FlashPolicyServer INSTANCE = new FlashPolicyServer();
     }
 
     private class Runner implements Runnable, Shutdownable {
-
-        private final String POLICY = "<?xml version=\"1.0\"?>\n"
-                + "<!DOCTYPE cross-domain-policy SYSTEM \"/xml/dtds/cross-domain-policy.dtd\">\n"
-                + "\n"
-                + "<!-- Policy file for xmlsocket://socks.example.com -->\n"
-                + "<cross-domain-policy> \n"
-                + "\n"
-                + "   <!-- This is a master socket policy file -->\n"
-                + "   <!-- No other socket policies on the host will be permitted -->\n"
-                + "   <site-control permitted-cross-domain-policies=\"master-only\"/>\n"
-                + "\n"
-                + "   <!-- Instead of setting to-ports=\"*\", administrator's can use ranges and commas -->\n"
-                + "   <allow-access-from domain=\"" + (Main.getRunMode() == RunMode.TEST ? "127.0.0.1" : Config.get("host name")) + "\" to-ports=\"" + Main.MUD_PORT + "\" />\n"
-                + "\n"
-                + "</cross-domain-policy>\n"
-                + "";
         private AtomicBoolean running = new AtomicBoolean(true);
         private ServerSocketChannel channel = null;
         private Thread serverThread = null;
 
         public Runner(ServerSocketChannel flashPolicySocketChannel) {
             channel = flashPolicySocketChannel;
-            System.out.println("Flash policy: '" + POLICY + "'");
+            //System.out.println("Flash policy: '" + POLICY + "'");
             MudShutdown.registerShutdownable(this);
         }
 
@@ -90,7 +87,7 @@ public class FlashPolicyServer /*extends AbstractEventManager<ConnectionAccepted
 
             try {
                 channel.configureBlocking(true);
-                Logger.getLogger("PolicyServer").log(Level.INFO, "Waiting for connection to flash policy server...");
+                //Logger.getLogger("PolicyServer").log(Level.INFO, "Waiting for connection to flash policy server...");
                 while (running.get()) {
                     try {
                         SocketChannel socket = channel.accept();
@@ -127,8 +124,7 @@ public class FlashPolicyServer /*extends AbstractEventManager<ConnectionAccepted
         }
 
         private synchronized void sendPolicy(final SocketChannel channel) {
-            MudThreadManager.execute(new Runnable() {
-
+            ThreadsManager.getGlobal().executeImmediately(new Runnable() {
                 @Override
                 public void run() {
                     try {

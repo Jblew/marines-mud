@@ -23,18 +23,15 @@ import marinesmud.RunMode;
 import marinesmud.system.Config;
 import marinesmud.lib.time.MudCalendar;
 import marinesmud.lib.NotificationProviders;
-import marinesmud.lib.help.HelpManager;
 import marinesmud.lib.logging.Level;
 import marinesmud.lib.security.MudSecurityManager;
 import marinesmud.scl.SCLUnitHolder;
 import marinesmud.system.UptimeKeeper;
 import marinesmud.web.FlashPolicyServer;
-import marinesmud.tap.Telnet;
+import marinesmud.tap.TelnetServer;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
-import marinesmud.system.threadmanagers.tickers.DayNight;
 import marinesmud.system.threadmanagers.Tickers;
-import marinesmud.web.OldWebServer;
 import marinesmud.web.WebServer;
 import marinesmud.world.area.Area;
 import marinesmud.world.area.room.Room;
@@ -53,20 +50,18 @@ public class Bootstrap {
     private Bootstrap() {
     }
 
-    public static void start(RunMode runMode, ServerSocketChannel mudSocketChannel, ServerSocketChannel flashPolicySocketChannel) {
-        getInstance()._start(runMode, mudSocketChannel, flashPolicySocketChannel);
+    public static void start(RunMode runMode, ServerSocketChannel flashPolicySocketChannel) {
+        getInstance()._start(runMode, flashPolicySocketChannel);
     }
 
-    public void _start(RunMode runMode, ServerSocketChannel mudSocketChannel, ServerSocketChannel flashPolicySocketChannel) {
+    public void _start(RunMode runMode, ServerSocketChannel flashPolicySocketChannel) {
         Logger logger = Logger.getLogger("bootstrap");
         if (started.get()) {
             throw new RuntimeException("System has been already started!");
         }
 
         try {
-            System.out.println("");
             logger.log(Level.INFO, "[SERVER START] RUN MODE: ***{0}***", runMode.name());
-            System.out.println(runMode.getInfo());
             checkEnvironment();
             initSecurity();
             checkLicense();
@@ -100,19 +95,13 @@ public class Bootstrap {
             MudShutdown.panicShutdown();
         }
 
-        System.out.println("MUD TIME: " + MudCalendar.getInstance().getDateTime().getStringTime() + "; REAL TIME: " + TimeUtils.getStringTime());
-        //MudLogger.log("\033[1;31mPamiętaj, aby uruchomić serwer \"smud2/flash policy/flashpolicy.py\", jeżeli chcesz korzystać z smuda!\033[0m");
-        System.out.println("Session uid: " + MudSecurityManager.getSessionUID());
-        System.out.println("Type quit to stop server!");
-        System.out.println("");
-        System.out.println("");
+        Logger.getLogger("ServerApp").info("Bootstrap done.");
 
         started.set(true);
 
         //System.out.println("Test function: "+SimpleCompiler.compile(Config.get("test function")).doIt(null));
 
         startSCLServer();
-        startMudServer(mudSocketChannel);
     }
 
     private void checkEnvironment() {
@@ -186,10 +175,6 @@ public class Bootstrap {
         //HelpManager.init();
     }
 
-    private void startMudServer(ServerSocketChannel mudSocketChannel) {
-        Telnet.Server.start(mudSocketChannel);
-    }
-
     private void registerShutdown() {
         MudShutdown.register(new Shutdownable[]{});
     }
@@ -261,7 +246,7 @@ public class Bootstrap {
     }
 
     private void generateGamezip() throws IOException {
-        Logger.getLogger("ServerApp").info("Generating gamezip...");
+        //Logger.getLogger("ServerApp").info("Generating gamezip...");
         FileOutputStream fos = new FileOutputStream(Config.get("gamezip path"));
         ZipOutputStream zos = new ZipOutputStream(fos);
         for (File f : new File(Config.get("game files dir")).listFiles()) {
@@ -279,7 +264,7 @@ public class Bootstrap {
             }
         }
         zos.close();
-        Logger.getLogger("ServerApp").info("Generating gamezip done.");
+        //Logger.getLogger("ServerApp").info("Generating gamezip done.");
     }
 
     private void initPersistence() {
@@ -297,7 +282,9 @@ public class Bootstrap {
         }
         if (Player.Manager.getInstance().size() < 1) {
             System.out.println("New User(admin, test)");
-            Player.Manager.getInstance().addElement(new Player("admin"));
+            Player p = new Player("admin");
+            p.setAdmin(true);
+            Player.Manager.getInstance().addElement(p);
         }
     }
 

@@ -4,8 +4,6 @@
  */
 package marinesmud.world.beings;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import marinesmud.world.persistence.Caster;
 import marinesmud.world.persistence.WorldEnity;

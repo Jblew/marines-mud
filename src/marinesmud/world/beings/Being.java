@@ -4,15 +4,14 @@
  */
 package marinesmud.world.beings;
 
+import pl.jblew.code.libevent.EventListener;
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import pl.jblew.code.jutils.utils.math.Interpolation1f;
 import pl.jblew.code.jutils.utils.math.VariableFloat;
-import marinesmud.lib.JSEngine;
 import marinesmud.world.Position;
-import marinesmud.world.persistence.MultipleEnityManager;
+import marinesmud.world.persistence.EnityManager;
 import marinesmud.world.Race;
 import marinesmud.world.World;
 import marinesmud.world.area.room.Room;
@@ -21,36 +20,34 @@ import marinesmud.world.items.Item;
 import marinesmud.world.persistence.WorldEnity;
 import pl.jblew.code.jutils.utils.TextUtils;
 import pl.jblew.code.jutils.utils.math.RangeF;
-import pl.jblew.code.libevent.EventListener;
 import pl.jblew.code.libevent.EventManager;
 
 /**
  *
  * @author jblew
  */
-public abstract class Being extends WorldEnity implements EventListener<Message>, Serializable {
+public abstract class Being extends WorldEnity implements EventListener<Message> {
     @Persistent private String name = "being name";
     @Persistent private Race race = Race.getDefault();
     @Persistent private Position position = Position.STAND;
     @Persistent private VariableFloat health = new VariableFloat(1f, new RangeF(0, 1), new Interpolation1f() {
         public float calc(float x, float dt) {
-            return x+0.01f*dt;
+            return x + 0.01f * dt;
         }
     });
     @Persistent private VariableFloat movement = new VariableFloat(1f, new RangeF(0, 1), new Interpolation1f() {
         public float calc(float x, float dt) {
-            return x+0.01f*dt;
+            return x + 0.01f * dt;
         }
     });
-
     @Persistent private VariableFloat thirst = new VariableFloat(0f, new RangeF(0, 1), new Interpolation1f() {
         public float calc(float x, float dt) {
-            return x+0.005f*dt;
+            return x + 0.005f * dt;
         }
     });
     @Persistent private VariableFloat starvation = new VariableFloat(0f, new RangeF(0, 1), new Interpolation1f() {
         public float calc(float x, float dt) {
-            return x+0.005f*dt;
+            return x + 0.005f * dt;
         }
     });
     @Persistent private float money = 10f;
@@ -63,10 +60,10 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     @Persistent private float dexterity = 0;
     @Persistent private float wiseness = 0;
     @Persistent private float luck = 0;
-    @Persistent private Room room = Room.Manager.getInstance().getElement(0);
+    @Persistent private int room = 1;
     @Persistent private List<Item> inventory = new ArrayList<Item>();
     public transient final EventManager<Message> receivedMessagesEventManager = new EventManager<Message>();
-    
+
     public Being() {
         super();
         _init();
@@ -83,12 +80,8 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     }
 
     private void _init() {
-        room.messageEventManager.getListenersManager().addListener(this);
+        ((Room) getRoom()).messageEventManager.getListenersManager().addListener(this);
         World.getInstance().messagesEventManager.getListenersManager().addListener(this);
-    }
-
-    @Override
-    protected void destruct() {
     }
 
     public synchronized String getName() {
@@ -160,7 +153,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     }
 
     public synchronized int getMaxHealthPoints() {
-        return (int) (level * (Math.pow(condition, 2)+1)*getRace().getHealthConst());
+        return (int) (level * (Math.pow(condition, 2) + 1) * getRace().getHealthConst());
     }
 
     public synchronized int getHealthPoints() {
@@ -168,7 +161,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     }
 
     public synchronized int getMaxMovementPoints() {
-        return (int) (level * (Math.pow(condition, 2)+1)*getRace().getMovementConst());
+        return (int) (level * (Math.pow(condition, 2) + 1) * getRace().getMovementConst());
     }
 
     public synchronized int getMovementPoints() {
@@ -184,16 +177,17 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     }
 
     public synchronized Room getRoom() {
-        return room;
+        return Room.Manager.getInstance().getElement(room);
     }
 
     @Override
     public void actionPerformed(Message m) {
-        if(m.canHear(this)) this.receivedMessagesEventManager.fireEvent(m);
+        if (m.canHear(this)) {
+            this.receivedMessagesEventManager.fireEvent(m);
+        }
     }
 
-    @Override
-    public MultipleEnityManager<Being> getManager() {
+    public EnityManager<Being> getManager() {
         return Manager.getInstance();
     }
 
@@ -212,7 +206,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
         return true;
     }
 
-    public static final class Manager extends MultipleEnityManager<Being> {
+    public static final class Manager extends EnityManager<Being> {
         private Manager() {
             super(BeingCaster.getInstance(), "being");
         }
