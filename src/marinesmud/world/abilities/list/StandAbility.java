@@ -16,7 +16,7 @@ import pl.jblew.code.jutils.utils.TextUtils;
  * @author jblew
  */
 public class StandAbility extends Ability {
-    public void execute(Being b, Object... parameters) throws AbilityExecutionException {
+    public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         switch (b.getPosition()) {
             case STAND:
                 throw new AbilityExecutionException("Aren't you standing?");
@@ -25,9 +25,14 @@ public class StandAbility extends Ability {
                 b.getRoom().sendMessage(new ExceptMeMessage(b, TextUtils.ucfirst(b.getName()) + " falls asleep."));
                 b.setPosition(Position.STAND);
         }
+        return null;
     }
 
     public static StandAbility getInstance() {
-        return (StandAbility) InstanceHolder.INSTANCE;
+        return InstanceHolder.INSTANCE;
+    }
+
+    private static class InstanceHolder {
+        public static final StandAbility INSTANCE = new StandAbility();
     }
 }

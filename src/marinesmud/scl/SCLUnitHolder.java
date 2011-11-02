@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import marinesmud.system.Config;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
-import marinesmud.world.World;
 import marinesmud.world.beings.Player;
 import org.jboss.netty.channel.Channel;
 import pl.jblew.code.scl.ConnectionsListener;
@@ -140,7 +139,7 @@ public class SCLUnitHolder implements ConnectionsListener, Shutdownable {
             public Object invokeMethod(String methodName, Object[] parameters, SCLUnit unit, Channel channel) throws Exception {
                 if (getInstance().clients.containsKey(channel)) {
                     Client c = getInstance().clients.get(channel);
-                    String login = c.getUser().getLogin();
+                    String login = c.getPlayer().getName();
                     if (c.isLoggedIn()) {
                         c.logOut();
                     }
