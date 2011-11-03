@@ -107,7 +107,7 @@ public final class World extends WorldEnity implements Shutdownable {
         public static final World INSTANCE = new World(0);
     }
 
-    private static final class Manager extends EnityManager<World> {
+    public static final class Manager extends EnityManager<World> {
         private Manager() {
             super(World.class, "world");
         }

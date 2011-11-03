@@ -22,6 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -208,10 +209,11 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
                 Logger.getLogger(WorldEnity.class.getName()).log(Level.WARNING, "Cannot set value of not persisten field!");
             }
         } catch (NoSuchFieldException ex) {
-            if(baseCls.getSuperclass() != Object.class) {
+            if (baseCls.getSuperclass() != Object.class) {
                 _loadField(fname, value, baseCls.getSuperclass());
+            } else {
+                Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, "No such field ''{0}''. Skipping.", fname);
             }
-            else Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, "No such field ''{0}''. Skipping.", fname);
         } catch (SecurityException ex) {
             Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalArgumentException ex) {
@@ -302,6 +304,30 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
         getManager()._remove(this);
     }
 
+    public synchronized EnityShot shot() {
+        HashMap<String, Object> fieldsValues = new HashMap<String, Object>();
+
+        List<Field> fields = new ArrayList<Field>();
+        scanForFields(getClass(), fields);
+
+        for (Field f : fields) {
+            if (!Modifier.isStatic(f.getModifiers())) {
+                f.setAccessible(true);
+                if (f.getAnnotation(WorldEnity.Shot.class) != null) {
+                    try {
+                        fieldsValues.put(f.getName(), f.get(this));
+                    } catch (IllegalArgumentException ex) {
+                        Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IllegalAccessException ex) {
+                        Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        }
+
+        return new EnityShot(enityName(), getId(), fieldsValues);
+    }
+
     @Override
     public int compareTo(WorldEnity e) {
         if (!getClass().isInstance(e)) {
@@ -346,6 +372,11 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
     @Target(ElementType.FIELD)
     @Retention(RetentionPolicy.RUNTIME)
     protected static @interface Persistent {
+    }
+
+    @Target(ElementType.FIELD)
+    @Retention(RetentionPolicy.RUNTIME)
+    protected static @interface Shot {
     }
 
     @Aspect

@@ -22,6 +22,7 @@ public class Servlets {
         servlets.put("/auth", AuthServlet.class);
         servlets.put("/who", WhoServlet.class);
         servlets.put("/editor", EditorServlet.class);
+        servlets.put("/test", TestServlet.class);
         servlets.put("/", HelloServlet.class);
     }
 

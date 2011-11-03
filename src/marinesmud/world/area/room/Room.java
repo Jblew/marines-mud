@@ -24,6 +24,7 @@ import marinesmud.world.area.AreaType;
 import marinesmud.world.communication.Message;
 import marinesmud.world.items.Item;
 import marinesmud.world.persistence.EnityManager;
+import marinesmud.world.persistence.EnityShot;
 import pl.jblew.code.jutils.utils.RandomUtils;
 import pl.jblew.code.libevent.EventManager;
 /**

@@ -60,7 +60,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     @Persistent private float dexterity = 0;
     @Persistent private float wiseness = 0;
     @Persistent private float luck = 0;
-    @Persistent private int room = 1;
+    @Persistent private int room = 0;
     @Persistent private List<Item> inventory = new ArrayList<Item>();
     public transient final EventManager<Message> receivedMessagesEventManager = new EventManager<Message>();
 

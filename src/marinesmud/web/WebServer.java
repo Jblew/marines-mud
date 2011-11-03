@@ -7,22 +7,15 @@ package marinesmud.web;
 import java.net.InetSocketAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.Servlet;
 import marinesmud.web.servlets.Servlets;
-import org.eclipse.jetty.rewrite.handler.RedirectPatternRule;
-import org.eclipse.jetty.rewrite.handler.RewriteHandler;
-import org.eclipse.jetty.rewrite.handler.RewritePatternRule;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.bio.SocketConnector;
 import org.eclipse.jetty.server.handler.ContextHandler;
-import org.eclipse.jetty.server.handler.DefaultHandler;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.webapp.WebAppContext;
-import pl.jblew.code.jutils.utils.ResourceUtils;
 
 /**
  *
@@ -30,12 +23,18 @@ import pl.jblew.code.jutils.utils.ResourceUtils;
  */
 public class WebServer {
     private final Server server;
+    private InetSocketAddress addr;
 
     private WebServer() {
         server = new Server();
     }
 
+    public InetSocketAddress getAddress() {
+        return addr;
+    }
+
     public void bind(InetSocketAddress addr) {
+        this.addr = addr;
         SocketConnector connector = new SocketConnector();
 
         // Set some timeout options to make debugging easier.

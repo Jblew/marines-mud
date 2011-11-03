@@ -25,13 +25,15 @@ import marinesmud.lib.time.MudCalendar;
 import marinesmud.lib.NotificationProviders;
 import marinesmud.lib.logging.Level;
 import marinesmud.lib.security.MudSecurityManager;
-import marinesmud.scl.SCLUnitHolder;
+import marinesmud.remote.RemoteServer;
 import marinesmud.system.UptimeKeeper;
+import marinesmud.test.TestException;
 import marinesmud.web.FlashPolicyServer;
 import marinesmud.tap.TelnetServer;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
 import marinesmud.system.threadmanagers.Tickers;
+import marinesmud.test.list.Tests;
 import marinesmud.web.WebServer;
 import marinesmud.world.area.Area;
 import marinesmud.world.area.room.Room;
@@ -95,7 +97,14 @@ public class Bootstrap {
             MudShutdown.panicShutdown();
         }
 
-        Logger.getLogger("ServerApp").info("Bootstrap done.");
+        Logger.getLogger("Bootstrap").info("Bootstrap done. Running tests...");
+        try {
+            Tests.runAll();
+        } catch (TestException ex) {
+            logger.log(Level.WARNING, "Test exception", ex);
+            MudShutdown.panicShutdown();
+        }
+        Logger.getLogger("Bootstrap").info("Tests done. Everything should work correctly.");
 
         started.set(true);
 
@@ -242,7 +251,7 @@ public class Bootstrap {
     }
 
     private void startSCLServer() {
-        SCLUnitHolder.getInstance().start();
+        RemoteServer.getInstance().start();
     }
 
     private void generateGamezip() throws IOException {
