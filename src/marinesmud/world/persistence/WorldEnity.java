@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import marinesmud.lib.IdManager;
+import marinesmud.remote.RemoteMethodsDispatcher;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import pl.jblew.code.jutils.utils.FileUtils;
@@ -44,10 +46,10 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
     private transient final boolean created;
 
     public WorldEnity(int id, File file) {
+        this.id = id;
         created = false;
         FileInputStream fis = null;
         try {
-            this.id = id;
             fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
 
@@ -65,18 +67,12 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
                 Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-
-    public WorldEnity() {
-        created = true;
-        int maxId = 0;
-        for (WorldEnity e : getManager().getElements()) {
-            if (e.getId() > maxId) {
-                maxId++;
-            }
+        
+        if(IdManager.ID_MAP.isUsed(id)) {
+            throw new RuntimeException("EnityId ("+this.id+") already in use!");
         }
-        this.id = maxId + 1;
 
+        RemoteMethodsDispatcher.getInstance().registerRemoteObject(this.id, this);
         getManager()._addElement(this);
     }
 
@@ -84,6 +80,19 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
         created = true;
         this.id = id;
 
+        if(IdManager.ID_MAP.isUsed(id)) {
+            throw new RuntimeException("EnityId ("+this.id+") already in use!");
+        }
+
+        RemoteMethodsDispatcher.getInstance().registerRemoteObject(this.id, this);
+        getManager()._addElement(this);
+    }
+
+    public WorldEnity() {
+        created = true;
+        this.id = IdManager.ID_MAP.useFirstNotUsed();
+
+        RemoteMethodsDispatcher.getInstance().registerRemoteObject(this.id, this);
         getManager()._addElement(this);
     }
 
@@ -301,31 +310,8 @@ public abstract class WorldEnity implements Comparable<WorldEnity>, Serializable
         if (file.exists()) {
             file.delete();
         }
+        RemoteMethodsDispatcher.getInstance().unregisterRemoteObject(id);
         getManager()._remove(this);
-    }
-
-    public synchronized EnityShot shot() {
-        HashMap<String, Object> fieldsValues = new HashMap<String, Object>();
-
-        List<Field> fields = new ArrayList<Field>();
-        scanForFields(getClass(), fields);
-
-        for (Field f : fields) {
-            if (!Modifier.isStatic(f.getModifiers())) {
-                f.setAccessible(true);
-                if (f.getAnnotation(WorldEnity.Shot.class) != null) {
-                    try {
-                        fieldsValues.put(f.getName(), f.get(this));
-                    } catch (IllegalArgumentException ex) {
-                        Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IllegalAccessException ex) {
-                        Logger.getLogger(WorldEnity.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }
-
-        return new EnityShot(enityName(), getId(), fieldsValues);
     }
 
     @Override

@@ -14,6 +14,8 @@ import marinesmud.world.beings.Being;
  * @author jblew
  */
 public class GoAbility extends Ability {
+    private GoAbility() {}
+
     public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         if(parameters.length < 1 || !(parameters[0] instanceof Direction)) throw new IllegalArgumentException("GoAbility requires direction parameter.");
         return null;

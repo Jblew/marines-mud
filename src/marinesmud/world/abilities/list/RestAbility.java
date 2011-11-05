@@ -16,6 +16,8 @@ import pl.jblew.code.jutils.utils.TextUtils;
  * @author jblew
  */
 public class RestAbility extends Ability {
+    private RestAbility() {}
+
     public Object execute(Being b, Object... parameters) throws AbilityExecutionException {
         switch (b.getPosition()) {
             case REST:

@@ -16,6 +16,8 @@ import marinesmud.world.area.room.Room;
  * @author jblew
  */
 public class LookAbility extends Ability {
+    private LookAbility() {}
+
     public String execute(Being b, Object... parameters)  {
         Room r = b.getRoom();
         String out =  "{X"+r.getName()+"{x\n";
@@ -31,11 +33,11 @@ public class LookAbility extends Ability {
         return out;
     }
 
-    public static SayAbility getInstance() {
+    public static LookAbility getInstance() {
         return InstanceHolder.INSTANCE;
     }
 
     private static class InstanceHolder {
-        public static final SayAbility INSTANCE = new SayAbility();
+        public static final LookAbility INSTANCE = new LookAbility();
     }
 }

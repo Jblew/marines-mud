@@ -15,10 +15,6 @@ public final class Mob extends Being {
         super();
     }
 
-    public Mob(int id) {
-        super(id);
-    }
-
     public Mob(int id, File f) {
         super(id, f);
     }

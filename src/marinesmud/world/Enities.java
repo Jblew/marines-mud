@@ -16,11 +16,11 @@ import marinesmud.world.persistence.WorldEnity;
  * @author jblew
  */
 public enum Enities {
-    being(Being.class, Being.Manager.getInstance()),
-    world(World.class, World.Manager.getInstance()),
-    area(Area.class, Area.Manager.getInstance()),
-    room(Room.class, Room.Manager.getInstance()),
-    item(Item.class, Item.Manager.getInstance());
+    WORLD(World.class, World.Manager.getInstance()),
+    AREA(Area.class, Area.Manager.getInstance()),
+    ROOM(Room.class, Room.Manager.getInstance()),
+    BEING(Being.class, Being.Manager.getInstance()),
+    ITEM(Item.class, Item.Manager.getInstance());
 
     public final Class<? extends WorldEnity> cls;
     public final EnityManager<? extends WorldEnity> manager;
@@ -28,5 +28,11 @@ public enum Enities {
     private Enities(Class<? extends WorldEnity> cls, EnityManager<? extends WorldEnity> manager) {
         this.cls = cls;
         this.manager = manager;
+    }
+
+    public static void initAll() {
+        for(Enities e : values()) {
+            e.manager.init();
+        }
     }
 }

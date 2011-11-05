@@ -16,20 +16,23 @@ import marinesmud.world.persistence.WorldEnity;
 import marinesmud.system.shutdown.MudShutdown;
 import marinesmud.system.shutdown.Shutdownable;
 import marinesmud.world.communication.Message;
+import pl.jblew.code.jutils.utils.IdGenerator;
 import pl.jblew.code.libevent.EventManager;
 
 /**
  *
  *  * @author jblew  * @license Kod jest objęty licencją zawartą w pliku LICESNE
  */
-public final class World extends WorldEnity implements Shutdownable {
+public final class World extends WorldEnity implements Shutdownable, WorldInterface {
     @Persistent private List<String> reports = new LinkedList<String>();
     @Persistent public List<String> twitterMessages = Collections.synchronizedList(new LinkedList<String>());
     @Persistent public final Map<Integer, HelpTopic> helpTopics = new HashMap<Integer, HelpTopic>();
     public transient final EventManager<Message> messagesEventManager = new EventManager<Message>();
+    private transient final long ssid = IdGenerator.generate();
 
     private World() {
         super();
+        MudShutdown.registerShutdownable(this);
     }
 
     private World(int id) {
@@ -69,6 +72,14 @@ public final class World extends WorldEnity implements Shutdownable {
         throw new UnsupportedOperationException("World needn't casting.");
     }
 
+    public long getSSID() {
+        return ssid;
+    }
+
+    public String hello() {
+        return "HELLO";
+    }
+
     @Override
     public EnityManager<World> getManager() {
         return Manager.getInstance();
@@ -100,20 +111,21 @@ public final class World extends WorldEnity implements Shutdownable {
     }
 
     public static World getInstance() {
-        return InstanceHolder.INSTANCE;
-    }
-
-    private static class InstanceHolder {
-        public static final World INSTANCE = new World(0);
+        return Manager.getInstance().getFirst();
     }
 
     public static final class Manager extends EnityManager<World> {
         private Manager() {
-            super(World.class, "world");
+            super(World.class, "world", 0, 1);
         }
 
         public static Manager getInstance() {
             return InstanceHolder.INSTANCE;
+        }
+
+        @Override
+        protected void createFirst() {
+            new World(getFirstId());
         }
 
         private static class InstanceHolder {

@@ -20,6 +20,10 @@ public class PinkElephant extends Item {
     @Persistent private String name = "Pink elephant";
     @Persistent private String description = "Yu can see small pink elephant made of coloured glass. As you think, it's useless.";
 
+    public PinkElephant() {
+        super();
+    }
+    
     public PinkElephant(int id) {
         super(id);
     }

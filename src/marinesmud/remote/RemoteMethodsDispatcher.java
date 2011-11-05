@@ -17,6 +17,10 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import marinesmud.lib.HelloObject;
+import marinesmud.world.Enities;
+import marinesmud.world.World;
+import marinesmud.world.WorldInterface;
+import marinesmud.world.persistence.EnityManagerInterface;
 import pl.jblew.code.jutils.IdUseMap;
 import pl.jblew.code.jutils.utils.TypeUtils;
 
@@ -25,15 +29,18 @@ import pl.jblew.code.jutils.utils.TypeUtils;
  * @author jblew
  */
 public class RemoteMethodsDispatcher extends Listener {
-    private final ObjectSpace objectSpace;
-    private final IdUseMap idUseMap = new IdUseMap();
+    private final MyObjectSpace objectSpace;
 
     private RemoteMethodsDispatcher() {
-        objectSpace = new ObjectSpace();
+        objectSpace = new MyObjectSpace();
+
+        for(Enities e : Enities.values()) {
+            objectSpace.register(e.manager.getId(), e.manager);
+        }
     }
 
     public synchronized void registerClasses(Kryo kryo) {
-        ObjectSpace.registerClasses(kryo);
+        MyObjectSpace.registerClasses(kryo);
     }
 
     @Override
@@ -46,11 +53,14 @@ public class RemoteMethodsDispatcher extends Listener {
         objectSpace.removeConnection(conn);
     }
 
-    public synchronized int registerRemoteObject(Object o) {
-        int index = idUseMap.useFirstNotUsed();
-        objectSpace.register(index, o);
+    public synchronized void registerRemoteObject(int id, Object o) {
+        System.out.println("Registering remoteObject("+o.getClass()+") under id "+id);
+        objectSpace.register(id, o);
+    }
 
-        return index;
+    public synchronized void unregisterRemoteObject(int id) {
+        System.out.println("Unregistering remoteObject under id "+id);
+        objectSpace.unregister(id);
     }
 
     @Override
@@ -88,7 +98,9 @@ public class RemoteMethodsDispatcher extends Listener {
     }
 
     @Remote public synchronized Class<?>[] getClassesToRegister() {
-        return new Class<?>[]{TypeUtils.getClassArrayClass(), TypeUtils.getObjectArrayClass(), Class.class, MethodRequest.class, HelloObject.class};
+        return new Class<?>[]{TypeUtils.getClassArrayClass(), TypeUtils.getObjectArrayClass(), Class.class, MethodRequest.class, HelloObject.class,
+        ObjectSpace.InvokeMethod.class, MyObjectSpace.InvokeMethod.class, ObjectSpace.InvokeMethodResult.class, MyObjectSpace.InvokeMethodResult.class,
+        WorldInterface.class, EnityManagerInterface.class};
     }
 
     public static RemoteMethodsDispatcher getInstance() {

@@ -35,6 +35,7 @@ import marinesmud.system.shutdown.Shutdownable;
 import marinesmud.system.threadmanagers.Tickers;
 import marinesmud.test.list.Tests;
 import marinesmud.web.WebServer;
+import marinesmud.world.Enities;
 import marinesmud.world.area.Area;
 import marinesmud.world.area.room.Room;
 import marinesmud.world.beings.Player;
@@ -281,20 +282,7 @@ public class Bootstrap {
     }
 
     private void initNewWorldIfNeeded() {
-        if (!Area.Manager.getInstance().hasId(0)) {
-            Area a = new Area(0);
-            Area.Manager.getInstance().addElement(a);
-            a.setRoomRange(0, 1000);
-        }
-        if (!Room.Manager.getInstance().hasId(0)) {
-            Room.Manager.getInstance().addElement(new Room(0));
-        }
-        if (Player.Manager.getInstance().size() < 1) {
-            System.out.println("New User(admin, test)");
-            Player p = new Player("admin");
-            p.setAdmin(true);
-            Player.Manager.getInstance().addElement(p);
-        }
+        Enities.initAll();
     }
 
     private static class BootstrapHolder {

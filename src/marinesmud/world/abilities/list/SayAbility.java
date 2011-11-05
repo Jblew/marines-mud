@@ -19,7 +19,7 @@ import pl.jblew.code.jutils.utils.TextUtils;
  */
 public class SayAbility extends Ability {
     public String execute(Being b, Object... parameters) throws AbilityExecutionException {
-        if(parameters.length < 0 || !(parameters[0] instanceof String)) throw new IllegalArgumentException("SayAbility requires one parameter (String).");
+        if(parameters == null || parameters.length < 0 || parameters[0] == null || !(parameters[0] instanceof String)) throw new IllegalArgumentException("SayAbility requires one parameter (String).");
         String msg = b.getRace().getEncoder().encode((String)parameters[0]);
         if(b.getPosition() == Position.SLEEP) {
             msg = RandomUtils.getTextDestroyedForPercent(msg, 45);

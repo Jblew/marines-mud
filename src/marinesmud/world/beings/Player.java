@@ -20,17 +20,12 @@ public final class Player extends Being {
     private transient boolean loggedIn = false;
     private transient boolean playing = false;
 
-    public Player(String name) {
-        super();
-        setName(name);
+    public Player(int id) {
+        super(id);
     }
 
     public Player() {
         super();
-    }
-
-    public Player(int id) {
-        super(id);
     }
 
     public Player(int id, File f) {

@@ -134,11 +134,20 @@ public class Main implements Daemon {
         System.out.println(" +----------------------------------+");
         System.out.println(" |     MARINESMUD5 Server  v" + MARINESMUD.version.toString() + "   |");
         System.out.println(" +----------------------------------+");
-        System.out.println(" | By:   |");
-        System.out.println(" |        +JBLEW (www.jblew.pl)     |");
+        System.out.println(" |   By:                            |");
+        System.out.println(" |      +JBLEW (www.jblew.pl)       |");
         System.out.println(" +----------------------------------+");
         System.out.println("Credits:");
-        System.out.println("   Program uses DynamicCompiler created by David J. Biesack (David.Biesack@sas.com).");
+        System.out.println("   DynamicCompiler by David J. Biesack (David.Biesack@sas.com).");
+        System.out.println("   Netty (http://netty.io/)");
+        System.out.println("   Jetty (http://jetty.codehaus.org/jetty/)");
+        System.out.println("   Apache Commons (http://commons.apache.org/)");
+        System.out.println("   Twitter4J (http://twitter4j.org/)");
+        System.out.println("   Kryonet (http://code.google.com/)");
+        System.out.println("   Yamlbeans (http://yamlbeans.sourceforge.net/)");
+        System.out.println("   AspectJ (http://www.eclipse.org/aspectj/)");
+        System.out.println("   JTPL (http://jtpl.sourceforge.net/)");
+
 
         System.out.println("Command line arguments: " + ListBuilder.createSimpleList(args, " "));
 

@@ -18,6 +18,7 @@ import marinesmud.world.area.room.Room;
 import marinesmud.world.communication.Message;
 import marinesmud.world.items.Item;
 import marinesmud.world.persistence.WorldEnity;
+import pl.jblew.code.globallogger.GlobalLogger;
 import pl.jblew.code.jutils.utils.TextUtils;
 import pl.jblew.code.jutils.utils.math.RangeF;
 import pl.jblew.code.libevent.EventManager;
@@ -60,7 +61,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
     @Persistent private float dexterity = 0;
     @Persistent private float wiseness = 0;
     @Persistent private float luck = 0;
-    @Persistent private int room = 0;
+    @Persistent private int room = Room.Manager.getInstance().getFirstId();
     @Persistent private List<Item> inventory = new ArrayList<Item>();
     public transient final EventManager<Message> receivedMessagesEventManager = new EventManager<Message>();
 
@@ -208,11 +209,20 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
 
     public static final class Manager extends EnityManager<Being> {
         private Manager() {
-            super(BeingCaster.getInstance(), "being");
+            super(BeingCaster.getInstance(), "being", 6, 7);
         }
 
         public static Manager getInstance() {
             return InstanceHolder.INSTANCE;
+        }
+
+        @Override
+        protected void createFirst() {
+            GlobalLogger.GLOBAL.info("New Player(login:'admin', password:'test', admin:'true')");
+            Player p = new Player(getFirstId());
+            p.setName("admin");
+            p.changePassword("test");
+            p.setAdmin(true);
         }
 
         private static class InstanceHolder {

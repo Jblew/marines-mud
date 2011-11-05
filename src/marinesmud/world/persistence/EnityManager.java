@@ -12,12 +12,17 @@ import java.util.NoSuchElementException;
  *
  * @author jblew
  */
-public class EnityManager<T extends WorldEnity> {
+public abstract class EnityManager<T extends WorldEnity> {
     private final HashMap<Integer, T> elements = new HashMap<Integer, T>();
     private final String enityName;
+    private final int id;
+    private final int firstId;
 
-    protected EnityManager(Class<T> cls, String enityName) {
+    protected EnityManager(Class<T> cls, String enityName, int id, int firstId) {
         this.enityName = enityName;
+        this.id = id;
+        this.firstId = firstId;
+
         T[] _elements = (T[]) WorldEnity.loadAll(cls, this.enityName);
         for (T elem : _elements) {
             elements.put(elem.getId(), elem);
@@ -25,8 +30,11 @@ public class EnityManager<T extends WorldEnity> {
         WorldPersistence.getInstance().registerManager(this);
     }
 
-    protected EnityManager(Caster caster, String enityName) {
+    protected EnityManager(Caster caster, String enityName, int id, int firstId) {
         this.enityName = enityName;
+        this.id = id;
+        this.firstId = firstId;
+        
         T[] _elements = (T[]) WorldEnity.loadAllWithCasting(this.enityName, caster);
         for (T elem : _elements) {
             elements.put(elem.getId(), elem);
@@ -61,6 +69,7 @@ public class EnityManager<T extends WorldEnity> {
         return elements.size();
     }
 
+    @SuppressWarnings({"unchecked", "unchecked"})
     protected synchronized void _addElement(WorldEnity elem) {
         elements.put(elem.getId(), (T) elem);
     }
@@ -75,4 +84,24 @@ public class EnityManager<T extends WorldEnity> {
     public synchronized void _remove(WorldEnity elem) {
         elements.remove(elem.getId());
     }
+    
+    public synchronized int getId() {
+        return id;
+    }
+
+    public synchronized int getFirstId() {
+        return firstId;
+    }
+
+    public synchronized T getFirst() {
+        return getElement(firstId);
+    }
+
+    public synchronized void init() {
+        if(!hasId(getFirstId())) {
+            createFirst();
+        }
+    }
+
+    protected abstract void createFirst();
 }

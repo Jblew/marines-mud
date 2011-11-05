@@ -5,71 +5,60 @@
 package marinesmud.world;
 
 /**
- *
+ * An enum containing possible straight directions in 3D world.
+ * It also provides some useful data about them, like: x,y,z addition, or opposite direction.
  * @author jblew
+ * @license Kod jest objęty licencją zawartą w pliku LICESNE
  */
 public enum Direction {
-
-    NORTH("północ", "północy", "north", 0, -1, 0, "SOUTH"),
-    SOUTH("południe", "południa", "south", 0, 1, 0, "NORTH"),
-    WEST("zachód", "zachodu", "west", -1, 0, 0, "EAST"),
-    EAST("wschód", "wschodu", "east", 1, 0, 0, "WEST"),
-    UP("góra", "góry", "up", 0, 0, 1, "DOWN"),
-    DOWN("dół", "dołu", "down", 0, 0, -1, "UP");
+    NORTH("north", 0, -1, 0, "SOUTH"),
+    SOUTH("south", 0, 1, 0, "NORTH"),
+    WEST("west", -1, 0, 0, "EAST"),
+    EAST("east", 1, 0, 0, "WEST"),
+    UP("up", 0, 0, 1, "DOWN"),
+    DOWN("down", 0, 0, -1, "UP");
     private final int xAddition;
     private final int yAddition;
     private final int zAddition;
-    private final boolean is2D;
-    private final String mianownik;
-    private final String dopelniacz;
-    private final String shortcutName;
+    private final String name;
     private final String oppositeDirectionName;
 
-    private Direction(String mianownik_, String dopelniacz_, String shortcutName_, int xAddition_, int yAddition_, int zAddition_, String oppositeDirectionName_) {
-        mianownik = mianownik_;
-        dopelniacz = dopelniacz_;
-        shortcutName = shortcutName_;
-
-        xAddition = xAddition_;
-        yAddition = yAddition_;
-        zAddition = zAddition_;
-
-        if (zAddition == 0) {
-            is2D = true;
-        } else {
-            is2D = false;
-        }
-        oppositeDirectionName = oppositeDirectionName_;
+    private Direction(String name, int xAddition, int yAddition, int zAddition, String oppositeDirectionName) {
+        this.name = name;
+        this.xAddition = xAddition;
+        this.yAddition = yAddition;
+        this.zAddition = zAddition;
+        this.oppositeDirectionName = oppositeDirectionName;
     }
 
+    /**
+     * Returns addition in X axis. Eg. for east it's +1 and for west it's -1.
+     * @return Addition in X axis.
+     */
     public int getXAddition() {
         return xAddition;
     }
 
+    /**
+     * Returns addition in Y axis. Eg. for south it's +1 and for north it's -1.
+     * @return Addition in Y axis.
+     */
     public int getYAddition() {
         return yAddition;
     }
 
+    /**
+     * Returns addition in Z axis. Eg. for up it's -1 and for down it's +1.
+     * @return Addition in Z axis.
+     */
     public int getZAddition() {
         return zAddition;
     }
 
-    public boolean is2D() {
-        return is2D;
-    }
-
-    public String getMianownik() {
-        return mianownik;
-    }
-
-    public String getDopelniacz() {
-        return dopelniacz;
-    }
-
-    public String getShortcutName() {
-        return shortcutName;
-    }
-
+    /**
+     * Returns the opposite direction.
+     * @return The opposite direction.
+     */
     public Direction getOppositeDirection() {
         return Direction.valueOf(oppositeDirectionName);
     }

@@ -22,8 +22,23 @@ public final class Area extends WorldEnity {
     @Persistent private int resetsFrequencyInTicks = 60;
     @Persistent private String[] texts = new String[]{};
 
+    public Area() {
+        super();
+
+        if (minRoom == 0 && maxRoom == 0) {
+            int _minRoom = 0;
+            for (Area a : Manager.getInstance().getElements()) {
+                if (a.getMaxRoom() > _minRoom) {
+                    _minRoom = a.getMaxRoom();
+                }
+            }
+            minRoom = _minRoom + 1000;
+            maxRoom = minRoom + 1000;
+        }
+    }
+
     public Area(int id) {
-        super(id);
+        super();
 
         if (minRoom == 0 && maxRoom == 0) {
             int _minRoom = 0;
@@ -118,11 +133,17 @@ public final class Area extends WorldEnity {
 
     public static final class Manager extends EnityManager<Area> {
         private Manager() {
-            super(Area.class, "area");
+            super(Area.class, "area", 2,3);
         }
 
         public static Manager getInstance() {
             return InstanceHolder.INSTANCE;
+        }
+
+        @Override
+        protected void createFirst() {
+            Area a = new Area(getFirstId());
+            a.setRoomRange(0, 1000);
         }
 
         private static class InstanceHolder {
