@@ -133,7 +133,7 @@ public final class Area extends WorldEnity {
 
     public static final class Manager extends EnityManager<Area> {
         private Manager() {
-            super(Area.class, "area", 2,3);
+            super(Area.class, "area", 4, 5);
         }
 
         public static Manager getInstance() {

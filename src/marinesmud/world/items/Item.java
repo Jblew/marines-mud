@@ -72,7 +72,7 @@ public abstract class Item extends WorldEnity {
 
     public static final class Manager extends EnityManager<Item> {
         private Manager() {
-            super(ItemCaster.getInstance(), "item", 8, 9);
+            super(ItemCaster.getInstance(), "item", 10, 11);
         }
 
         @Override

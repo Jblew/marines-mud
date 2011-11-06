@@ -116,7 +116,7 @@ public final class World extends WorldEnity implements Shutdownable, WorldInterf
 
     public static final class Manager extends EnityManager<World> {
         private Manager() {
-            super(World.class, "world", 0, 1);
+            super(World.class, "world", 2, 3);
         }
 
         public static Manager getInstance() {

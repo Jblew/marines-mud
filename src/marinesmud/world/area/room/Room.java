@@ -190,7 +190,7 @@ public final class Room extends WorldEnity {
 
     public static final class Manager extends EnityManager<Room> {
         private Manager() {
-            super(Room.class, "room", 4, 5);
+            super(Room.class, "room", 6, 7);
         }
 
         @Override

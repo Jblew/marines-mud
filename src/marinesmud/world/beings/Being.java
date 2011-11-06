@@ -209,7 +209,7 @@ public abstract class Being extends WorldEnity implements EventListener<Message>
 
     public static final class Manager extends EnityManager<Being> {
         private Manager() {
-            super(BeingCaster.getInstance(), "being", 6, 7);
+            super(BeingCaster.getInstance(), "being", 8, 9);
         }
 
         public static Manager getInstance() {
