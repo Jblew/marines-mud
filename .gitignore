@@ -1,0 +1,9 @@
+nbproject/
+build/
+target/
+/lib/
+/libraries/
+/data/logs/*
+/data/queries/*
+/data/shutdowns/*
+*~
