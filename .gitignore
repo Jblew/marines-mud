@@ -7,3 +7,4 @@ target/
 /data/queries/*
 /data/shutdowns/*
 *~
+.DS_Store
